@@ -1,3 +1,3 @@
-Full stack open
+# Full stack open
 
-Deep Dive Into Modern Web Development
+## Deep Dive Into Modern Web Development
