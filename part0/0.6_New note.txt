@@ -1,0 +1,12 @@
+title Full stack open - Ex 0.6: New note
+
+browser->server:HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+
+browser<--server:HTTP status code 201: new note created
+
+note over browser:browser executes the event handler\n that renders notes to display
+
+
+
+
+

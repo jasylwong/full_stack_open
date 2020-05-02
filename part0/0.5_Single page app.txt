@@ -1,0 +1,25 @@
+title Full stack open - Ex 0.5: Single page app
+
+browser->server:HTTP GET https://fullstack-exampleapp.herokuapp.com/spa
+
+browser<--server:HTML-code
+
+browser->server:HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+
+browser<--server:main.css
+
+browser->server:HTTP GET https://fullstack-exampleapp.herokuapp.com/spa.js
+
+browser<--server:spa.js
+
+note over browser:browser starts executing js-code that\n requests JSON data from server
+
+browser->server:HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+
+browser<--server:[{content: "HTML is easy", date: "2019-05-23"}, ...]
+
+note over browser:browser executes the event handler\n that renders notes to display
+
+
+
+
