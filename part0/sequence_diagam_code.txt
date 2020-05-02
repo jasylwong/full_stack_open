@@ -1,0 +1,32 @@
+https://sequencediagram.org/
+
+Ex0: 
+title Full stack open - Ex 0.4: new note
+
+browser->server:HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note
+
+browser<--server:HTTP status code 302: redirect to /notes
+
+browser->server:HTTP GET https://fullstack-exampleapp.herokuapp.com/notes
+
+browser<--server:HTML-code
+
+browser->server:HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+
+browser<--server:main.css
+
+browser->server:HTTP GET https://fullstack-exampleapp.herokuapp.com/main.js
+
+browser<--server:main.js
+
+note over browser:browser starts executing js-code that\n requests JSON data from server
+
+browser->server:HTTP POST https://fullstack-exampleapp.herokuapp.com/data.json
+
+browser<--server:[{content: "HTML is easy", date: "2019-05-23"}, {content: "new note", date: "2020-05-02"}]
+
+note over browser:browser executes the event handler\n that renders notes to display
+
+
+
+
