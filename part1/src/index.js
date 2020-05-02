@@ -13,11 +13,11 @@ const App = () => {
   const age = 10;
 
   return(
-    <div>
+    <>
       <Hello name={name} age={age + 10}/>
       <Hello />
       <Hello />
-    </div>
+    </>
   )
 }
 
