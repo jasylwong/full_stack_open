@@ -1,22 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-const Hello = (props) => (
-  <div>
-    <p>Hello {props.name}, you are {props.age} years old</p>
-  </div>
-)
-
 const App = () => {
-  const name = "Bobby";
-  const age = 10;
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
 
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setLeft(left + 1)
+  }
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right + 1)
+  }
+
+  const History = () => <p>{allClicks.join('')}</p>
+    
   return(
     <>
-      <Hello name={name} age={age + 10}/>
-      <Hello />
-      <Hello />
+      <button onClick={handleLeftClick}>Left</button>
+      {left}
+      <button onClick={handleRightClick}>Right</button>
+      {right}
+      <History allClicks={allClicks} />
     </>
   )
 }
