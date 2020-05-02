@@ -4,5 +4,7 @@ Sequence diagrams created using: https://sequencediagram.org/
 
 ## Contents:
 
-a. General info
-b. Fundamentals of Web apps
+<ol type="a">
+  <li>General info</li>
+  <li>Fundamentals of Web apps</li>
+</ol>
