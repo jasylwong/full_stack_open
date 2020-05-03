@@ -7,14 +7,21 @@ import './index.css';
 const App = (props) => {
   const [value, setValue] = useState(10)
 
-  const handleClick = (name) => () => console.log(name)
+  const setToValue = (newValue) => {
+    setValue(newValue)
+  }
+
+  const Button = ({setToValue, text}) => (
+    <button onClick={setToValue}>{text}</button>
+  )
 
   return (
     
     <div>
       {value}
-      <button onClick={handleClick('Jason')}>Jason</button>
-      <button onClick={handleClick('Betty')}>Betty</button>
+      <Button setToValue={() => setToValue(1000)} text={'thousand'} />
+      <Button setToValue={() => setToValue(0)} text={'reset'} />
+      <Button setToValue={() => setToValue(value + 1)} text={'increment'} />
     </div>
   )
 
