@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
+const Heading = ({text}) => <h2>{text}</h2>
+
 const Button = ({handleClick, text}) => (
   <button onClick={handleClick}>{text}</button>
 )
@@ -20,13 +22,19 @@ const App = (props) => {
     copy[selected] += 1
     setPoints(copy)
   }
+
+  const most = points.indexOf(Math.max(...points))
   
   return (
     <>
+      <Heading text={"Anecdote of the day"} />
       <Display text={props.anecdotes[selected]} />
       <Display text={`has ${points[selected]} votes`} />
       <Button handleClick={vote} text={'vote'}/>
       <Button handleClick={next} text={'next anecdote'}/>
+      <Heading text={"Anecdote with most votes"} />
+      <Display text={props.anecdotes[most]} />
+      <Display text={`has ${points[most]} votes`} />
     </>
   )
 }
@@ -39,8 +47,6 @@ const anecdotes = [
   'Premature optimization is the root of all evil.',
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
-
-// const points = [0]
 
 ReactDOM.render(
   <App anecdotes={anecdotes} />, 
