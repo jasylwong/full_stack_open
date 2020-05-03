@@ -9,10 +9,10 @@ const Button = ({addCount, text}) => (
 
 const Statistic = ({text, stat}) => {
   return (
-    <>
+    <tr>
       <td>{text}</td>
       <td>{stat}</td>
-    </>
+    </tr>
   )
 }
 
@@ -21,12 +21,14 @@ const Statistics = (props) => {
   
   return (
     <table>
-      <tr><Statistic text={"good"} stat={props.good} /></tr>
-      <tr><Statistic text={"neutral"} stat={props.neutral} /></tr>
-      <tr><Statistic text={"bad"} stat={props.bad} /></tr>
-      <tr><Statistic text={"all"} stat={props.all} /></tr>
-      <tr><Statistic text={"average"} stat={props.average} /></tr>
-      <tr><Statistic text={"positive"} stat={props.positive} /></tr>
+      <tbody>
+        <Statistic text={"good"} stat={props.good} />
+        <Statistic text={"neutral"} stat={props.neutral} />
+        <Statistic text={"bad"} stat={props.bad} />
+        <Statistic text={"all"} stat={props.all} />
+        <Statistic text={"average"} stat={props.average} />
+        <Statistic text={"positive"} stat={props.positive} />
+      </tbody>
     </table>
   )
 }
