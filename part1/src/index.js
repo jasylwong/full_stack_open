@@ -7,10 +7,14 @@ import './index.css';
 const App = (props) => {
   const [value, setValue] = useState(10)
 
+  const handleClick = (name) => () => console.log(name)
+
   return (
+    
     <div>
       {value}
-      <button>reset to zero</button>
+      <button onClick={handleClick('Jason')}>Jason</button>
+      <button onClick={handleClick('Betty')}>Betty</button>
     </div>
   )
 
