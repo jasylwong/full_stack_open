@@ -36,7 +36,7 @@ const App = (props) => {
         </button>
       </div>
       <ul>
-        {notes.map(note => <Note key={note.id} note={note} />)}
+        {notesToShow.map(note => <Note key={note.id} note={note} />)}
       </ul>
       <form onSubmit={addNote}>
         <input value={newNote} onChange={handleNoteChange} />
