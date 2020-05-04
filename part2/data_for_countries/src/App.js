@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// const Results = ({ countries }) => {
+
+//   return results();
+// }
+
+
 const App = () => {
   const [countries, setCountries] = useState([])
   const [search, setSearch] = useState('')
   
   const handleSearch = (event) => {
-    console.log(event.target.value);
     setSearch(event.target.value)
   }
 
@@ -16,13 +21,41 @@ const App = () => {
     })
   }
   useEffect(hook, [])
-  console.log(countries)
 
+  const filteredCountries = 
+    ( search === ''
+      ? countries
+      : countries.filter(country => 
+        country.name.toLowerCase().includes(search.toLowerCase()))
+    )
+
+    const results = (countries) => {
+      if (countries.length > 10) {
+        return <div>Too many matches, specify another filter</div>
+      } else if (countries.length > 1) {
+        return countries.map(country => 
+          <div key={countries.indexOf(country)}>{country.name}</div>)
+      } else if (countries.length === 1) {
+        return (
+          <div>
+            <h2>{countries[0].name}</h2>
+            <div>capital {countries[0].capital}</div>
+            <div>population {countries[0].population}</div>
+            <h3>Languages</h3>
+            <ul>
+              {countries[0].languages.map(language => <li key={countries[0].languages.indexOf(language)}>{language.name}</li>)}
+            </ul>
+            <img src={countries[0].flag} width='100px' alt={countries[0].name}/>
+          </div>
+        )
+      }
+    }
 
   return (
     <div>
       find countries <input value={search} onChange={handleSearch} />
-      {countries.map(country => <div key={countries.indexOf(country)}>{country.name}</div>)}
+      {/* <Results countries={filteredCountries} /> */}
+      {results(filteredCountries)}
     </div>
   )
 }
