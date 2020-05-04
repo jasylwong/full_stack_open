@@ -14,7 +14,6 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
-  const [filteredPersons, setFilteredPersons] = useState(persons)
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -24,7 +23,6 @@ const App = () => {
       window.alert(`${newNumber} is already used by someone else`)
     } else {
       setPersons(persons.concat({ name: newName, number: newNumber }))
-      setFilteredPersons(persons.concat({ name: newName, number: newNumber }))
       setNewName('')
       setNewNumber('')
     }
@@ -40,11 +38,13 @@ const App = () => {
 
   const handleFilter = (event) => {
     setFilter(event.target.value)
-    const filtered = filter === '' 
-      ? persons 
-      : persons.filter(person => person.name.toLowerCase().includes(event.target.value))
-    setFilteredPersons(filtered)
   }
+
+  const filteredPersons = 
+    ( filter === ''
+      ? persons
+      : persons.filter(person => person.name.toLowerCase().includes(filter))
+    )
 
   return (
     <div>
