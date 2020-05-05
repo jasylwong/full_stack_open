@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Filter from './components/Filter';
 import Form from './components/Form';
 import Persons from './components/Persons';
+import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -11,7 +11,7 @@ const App = () => {
   const [filter, setFilter] = useState('')
 
   const hook = () => {
-    axios.get('http://localhost:3001/persons').then(resolve => {
+    personService.getAll().then(resolve => {
       setPersons(resolve.data)
     })
   }
@@ -25,7 +25,7 @@ const App = () => {
       window.alert(`${newNumber} is already used by someone else`)
     } else {
       const newPerson = { name: newName, number: newNumber }
-      axios.post("http://localhost:3001/persons/", newPerson)
+      personService.create(newPerson)
         
       setPersons(persons.concat(newPerson))
       setNewName('')
