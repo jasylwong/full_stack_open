@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+require('dotenv').config();
 
 const Results = ({ countries, showCountry }) => {
   if (countries.length > 10) {
@@ -19,6 +20,26 @@ const Results = ({ countries, showCountry }) => {
   }
 }
 
+const Weather = ({ country }) => {
+  const [weather, setWeather] = useState('')
+  const [hasData, setHasData] = useState(false);
+
+
+  const hook = () => {
+    axios.get("http://api.weatherstack.com/current?access_key="+process.env.REACT_APP_WEATHERSTACK_KEY+"&query="+country.capital)
+      .then(resolve => {
+        setWeather(resolve.data)
+        setHasData(true);
+        console.log(resolve.data.current.weather_descriptions[0])
+      })
+  }
+  useEffect(hook, [])
+
+  return (
+    hasData? (<div>{weather.current.weather_descriptions[0]}</div>) : null
+  )
+}
+
 const Country = ({ country }) => {
   return (
     <div>
@@ -33,6 +54,8 @@ const Country = ({ country }) => {
           </li>)}
       </ul>
       <img src={country.flag} width='100px' alt={country.name}/>
+      <h3>Weather in {country.capital}</h3>
+      <Weather country={country} />
     </div>
   )
 }
@@ -40,7 +63,7 @@ const Country = ({ country }) => {
 const App = () => {
   const [countries, setCountries] = useState([])
   const [search, setSearch] = useState('')
-  
+
   const handleSearch = (event) => {
     setSearch(event.target.value)
   }
