@@ -52,9 +52,11 @@ const App = () => {
     )
 
   const deletePerson = (person) => {
-    personService.remove(person)
-    const newPersons = persons.filter(p => p.id !== person.id)
-    setPersons(newPersons)
+    if (window.confirm(`Delete ${person.name}?`)) {
+      personService.remove(person)
+      const newPersons = persons.filter(p => p.id !== person.id)
+      setPersons(newPersons)
+    }
   }
 
   return (
