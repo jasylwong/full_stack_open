@@ -8,32 +8,35 @@ const App = () => {
   const [showAll, setShowAll] = useState(true)
 
   const hook = () => {
-    console.log('effect')
     axios
       .get('http://localhost:3001/notes')
       .then(response => {
-        console.log('promise fulfilled');
         setNotes(response.data);        
       })
   }
-
   useEffect(hook, [])
-  console.log('render', notes.length, 'notes');
   
   const addNote = (event) => {
     event.preventDefault()
-    const newNoteDetails = {
+    const noteObject = {
       id: notes.length + 1,
       content: newNote,
       date: new Date().toISOString(),
-      important: true
+      important: Math.random() > 0.5
     }
-    setNotes(notes.concat(newNoteDetails))
+
+    axios
+      .post('http://localhost:3001/notes', noteObject)
+      .then(response => {
+        setNotes(notes.concat(response.data))
+        setNewNote('')
+      })
+
+    setNotes(notes.concat(noteObject))
     setNewNote('')
   }
 
   const handleNoteChange = (event) => {
-    console.log(event.target.value)
     setNewNote(event.target.value)
   }
 
