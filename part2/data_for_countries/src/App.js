@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Country from './components/Country';
 require('dotenv').config();
 
 const Results = ({ countries, showCountry }) => {
@@ -24,39 +25,23 @@ const Weather = ({ country }) => {
   const [weather, setWeather] = useState('')
   const [hasData, setHasData] = useState(false);
 
-
   const hook = () => {
     axios.get("http://api.weatherstack.com/current?access_key="+process.env.REACT_APP_WEATHERSTACK_KEY+"&query="+country.capital)
       .then(resolve => {
         setWeather(resolve.data)
         setHasData(true);
-        console.log(resolve.data.current.weather_descriptions[0])
       })
   }
   useEffect(hook, [])
 
   return (
-    hasData? (<div>{weather.current.weather_descriptions[0]}</div>) : null
-  )
-}
-
-const Country = ({ country }) => {
-  return (
-    <div>
-      <h2>{country.name}</h2>
-      <div>capital {country.capital}</div>
-      <div>population {country.population}</div>
-      <h3>Languages</h3>
-      <ul>
-        {country.languages.map(language => 
-          <li key={country.languages.indexOf(language)}>{
-            language.name}
-          </li>)}
-      </ul>
-      <img src={country.flag} width='100px' alt={country.name}/>
-      <h3>Weather in {country.capital}</h3>
-      <Weather country={country} />
-    </div>
+    hasData ? (
+      <>
+      <div>temperature: {weather.current.temperature} celsius</div>
+      <img src={weather.current.weather_icons[0]} />
+      <div>wind: {weather.current.wind_speed} mph direction {weather.current.wind_dir}</div>
+      </>
+    ) : null
   )
 }
 
