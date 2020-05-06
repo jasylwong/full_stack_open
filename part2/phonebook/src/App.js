@@ -83,8 +83,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={confMessage} />
-      <Notification message={errorMessage} />
+      <Notification message={confMessage} borderColor='confirmation' />
+      <Notification message={errorMessage} borderColor='error' />
       <Filter filter={filter} handleFilter={handleFilter}/>
       <h2>Add a new</h2>
       <Form addPerson={addPerson}

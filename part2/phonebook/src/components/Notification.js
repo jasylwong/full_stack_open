@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Notification = ({ message }) => {
+const Notification = ({ message, borderColor }) => {
   if (message === null) {
     return null
   }
 
   return (
-    <div className='confirmation'>
+    <div className={borderColor} >
       {message}
     </div>
   )
