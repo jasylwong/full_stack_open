@@ -21,12 +21,16 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault()
     const newPerson = { name: newName, number: newNumber}
-
+    
     if (persons.map(person => person.name).includes(newName)) {
       const findId = persons.find(p => p.name === newName).id
       personService.update(findId, newPerson)
         .then(returnedPerson => {
-          setPersons(persons.map(p => p.id !== findId ? p : returnedPerson))
+          // console.log(findId);
+          // console.log(returnedPerson);
+          
+          // // console.log(persons.map(p => (p.id !== findId ? p : returnedPerson))
+          setPersons(persons.map(p => (p.id !== findId ? p : returnedPerson)))
         })
     } else if (persons.map(person => person.number).includes(newNumber)) {
       window.alert(`The number '${newNumber}' is already used by someone else`)
@@ -63,13 +67,14 @@ const App = () => {
   const deletePerson = (person) => {
     if (window.confirm(`Delete ${person.name}?`)) {
       personService.remove(person.id).then(
-      // .catch(error => {
-        //   window.alert(`${person.name} deleted`)
-        // })
         setPersons(
           persons.filter(p => (p.id !== person.id ? person : null))
         )
       )
+      .catch(error => {
+        console.log('error!')
+        window.alert(`${person.name} already deleted`)
+      })
     }
   }
 
