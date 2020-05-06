@@ -9,3 +9,11 @@
   <li>Altering data in a server</li>
   <li>Adding styles to React app</li>
 </ol>
+
+## Useful commands
+
+```
+> npm install json-server --save-dev
+> npm install axios
+> npx json-server --port 3001 --watch db.json # running the json-server
+```
