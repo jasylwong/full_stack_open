@@ -10,7 +10,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
-  const [confMessage, setConfirmMessage] = useState('placeholder')
+  const [confMessage, setConfirmMessage] = useState(null)
 
   useEffect(() => {
     personService.getAll().then(resolve => {
@@ -34,6 +34,7 @@ const App = () => {
       personService.create(newPerson).then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
         setConfirmMessage(`${newName} added`)
+        setTimeout(() => {setConfirmMessage(null)}, 3000)
       })
     }
     setNewName('')
