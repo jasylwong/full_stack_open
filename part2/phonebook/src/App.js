@@ -11,6 +11,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
   const [confMessage, setConfirmMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     personService.getAll().then(resolve => {
@@ -26,11 +27,12 @@ const App = () => {
       const findId = persons.find(p => p.name === newName).id
       personService.update(findId, newPerson)
         .then(returnedPerson => {
-          // console.log(findId);
-          // console.log(returnedPerson);
-          
-          // // console.log(persons.map(p => (p.id !== findId ? p : returnedPerson))
           setPersons(persons.map(p => (p.id !== findId ? p : returnedPerson)))
+        })
+        .catch(error => {
+          setErrorMessage(`${newName} has already been removed from server` )
+          setTimeout(() => {setErrorMessage(null)}, 3000)
+          setPersons(persons.filter(p => p.id !== findId))
         })
     } else if (persons.map(person => person.number).includes(newNumber)) {
       window.alert(`The number '${newNumber}' is already used by someone else`)
@@ -82,6 +84,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Notification message={confMessage} />
+      <Notification message={errorMessage} />
       <Filter filter={filter} handleFilter={handleFilter}/>
       <h2>Add a new</h2>
       <Form addPerson={addPerson}
