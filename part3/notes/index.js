@@ -18,14 +18,20 @@ let notes = [
     content: "GET and POST are the most important methods of HTTP protocol",
     date: "2019-05-30T19:20:14.298Z",
     important: true
+  },
+  {
+    id: 4,
+    content: "Fourth",
+    date: "2019-05-30T19:20:14.298Z",
+    important: true
   }
 ]
 
-const app = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' })
-  res.end(JSON.stringify(notes))
+const app = http.createServer((request, response) => {
+  response.writeHead(200, { 'Content-Type': 'application/json' })
+  response.end(JSON.stringify(notes))
 })
 
 const port = 3001
 app.listen(port)
-console.log(`Server running on port${port}`);
+console.log(`Server running on port ${port}`)
