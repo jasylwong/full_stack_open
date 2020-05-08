@@ -28,26 +28,12 @@ let notes = [
   }
 ]
 
-let bar = [
-  {
-    foo: 'bar'
-  }
-]
-
 app.get('/', (req, res) => {
   res.send('<h1>hello world</h1>')
 })
 
-app.get('/bye', (req, res) => {
-  res.send('<h1>goodbye world</h1>')
-})
-
 app.get('/api/notes', (req, res) => {
   res.json(notes)
-})
-
-app.get('/api/foo', (req, res) => {
-  res.json(bar)
 })
 
 const PORT = 3001
