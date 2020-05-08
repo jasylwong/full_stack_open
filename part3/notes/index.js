@@ -25,6 +25,10 @@ let notes = [
     content: "Fourth",
     date: "2019-05-30T19:20:14.298Z",
     important: true
+  },
+  {
+    id: 5,
+    content: 'cinq'
   }
 ]
 
