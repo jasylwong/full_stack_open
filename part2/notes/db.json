@@ -31,22 +31,16 @@
       "important": false
     },
     {
-      "id": 6,
-      "content": "whatsup",
-      "date": "2020-05-05T19:51:03.494Z",
-      "important": true
+      "content": "test",
+      "date": "2020-05-09T11:12:56.223Z",
+      "important": false,
+      "id": 6
     },
     {
-      "id": 7,
-      "content": "shiba inu",
-      "date": "2020-05-05T20:19:18.962Z",
-      "important": false
-    },
-    {
-      "id": 8,
-      "content": "howdy",
-      "date": "2020-05-07T21:27:24.581Z",
-      "important": false
+      "content": "hello",
+      "date": "2020-05-09T11:27:13.564Z",
+      "important": false,
+      "id": 7
     }
   ]
 }
