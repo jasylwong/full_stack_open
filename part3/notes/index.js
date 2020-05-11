@@ -1,10 +1,23 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const mongoose = require('mongoose')
 
 app.use(express.json())
 app.use(express.static('build'))
 app.use(cors())
+
+const url = `mongodb+srv://jasylwong:${password}@cluster0-7yxwh.mongodb.net/note-app?retryWrites=true&w=majority`
+
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+
+const noteSchema = new mongoose.Schema({
+  content: String,
+  date: Date,
+  important: Boolean,
+})
+
+const Note = mongoose.model('Note', noteSchema)
 
 let notes = [
   {
@@ -42,7 +55,9 @@ let notes = [
 ]
 
 app.get('/api/notes', (req, res) => {
-  res.json(notes)
+  Note.find({}).then(notes => {
+    response.json(notes)
+  })
 })
 
 const generateId = () => {
