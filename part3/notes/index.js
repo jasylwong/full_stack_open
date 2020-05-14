@@ -9,17 +9,14 @@ app.use(express.json())
 app.use(express.static('build'))
 
 app.get('/api/notes', (req, res) => {
-  Note.find({}).then(notes => {
-    res.json(notes.map(note => note.toJSON()))
-  })
+  Note.find({})
+    .then(notes => {
+      res.json(notes.map(note => note.toJSON()))
+    })
 })
 
 app.post('/api/notes', (req, res, next) => {
   const body = req.body
-
-  // if (body.content === undefined) {
-  //   return res.status(400).json({ error: 'content missing' })
-  // }
 
   const note = new Note({
     content: body.content,
@@ -28,8 +25,9 @@ app.post('/api/notes', (req, res, next) => {
   })
 
   note.save()
-    .then(savedNote => {
-      res.json(savedNote.toJSON())
+    .then(savedNote => savedNote.toJSON())
+    .then(savedAndFormattedNote => {
+      res.json(savedAndFormattedNote)
     })
     .catch(error => next(error))
 })
