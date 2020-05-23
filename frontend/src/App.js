@@ -18,8 +18,6 @@ function App() {
   return (
     <div className="App">
       <div>{counter}</div>
-      {/* <button onClick={handleClick} >left</button>
-      <button onClick={handleClick} >right</button> */}
       <Button handleClick={handleClick} word={'left'} />
       <Button handleClick={handleClick} word={'right'} />
     </div>
