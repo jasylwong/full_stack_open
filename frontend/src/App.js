@@ -1,25 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 
-function Button({ handleClick, word }) {
-  return (
-    <button onClick={() => handleClick(word)} >{word}</button>
-  )
-}
+const notes = [
+  {
+    id: 1,
+    content: 'HTML is easy',
+    date: '2019-05-30T17:30:31.098Z',
+    important: true
+  },
+  {
+    id: 2,
+    content: 'Browser can execute only Javascript',
+    date: '2019-05-30T18:39:34.091Z',
+    important: false
+  },
+  {
+    id: 3,
+    content: 'GET and POST are the most important methods of HTTP protocol',
+    date: '2019-05-30T19:20:14.298Z',
+    important: true
+  }
+]
 
 function App() {
-  const [counter, setCounter] = useState(0)
-
-  const handleClick = (word)  => {
-    console.log(word)
-    setCounter(counter + 1)
-  }
 
   return (
     <div className="App">
-      <div>{counter}</div>
-      <Button handleClick={handleClick} word={'left'} />
-      <Button handleClick={handleClick} word={'right'} />
+      {
+        notes.map(note => {
+          return <li key={note.id}>{note.content}</li>
+        })
+      }
     </div>
   );
 }
