@@ -4,15 +4,20 @@ import './App.css';
 
 function App(props) {
   const [notes, setNotes] = useState(props.notes)
-  const [newNote, setNewNote] = useState('a new note')
+  const [newNote, setNewNote] = useState('')
 
-   const handleSubmit = () => {
-    //  setNotes(notes)
-     console.log('Submitted!')
+   const handleSubmit = (event) => {
+    event.preventDefault()
+    const newNoteToAdd =   {
+      id: notes.length + 1,
+      content: newNote,
+      date: Date.now(),
+      important: true
+    }
+    setNotes([...notes, newNoteToAdd])
    }
 
    const handleChange = (event) => {
-     console.log(event.target.value)
      setNewNote(event.target.value)
    }
 
@@ -26,7 +31,7 @@ function App(props) {
       }
 
       <h2>Add a note</h2>
-      <form onSubmit={() => handleSubmit()}>
+      <form onSubmit={handleSubmit}>
         <label>
           Note:
           <input type='text' name='name' value={newNote} onChange={handleChange}/>
