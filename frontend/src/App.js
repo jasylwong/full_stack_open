@@ -11,7 +11,7 @@ function App(props) {
     const newNoteToAdd =   {
       id: notes.length + 1,
       content: newNote,
-      date: Date.now(),
+      date: new Date().toISOString(),
       important: true
     }
     setNotes([...notes, newNoteToAdd])
