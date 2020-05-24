@@ -5,8 +5,9 @@ import './App.css';
 function App(props) {
   const [notes, setNotes] = useState(props.notes)
   const [newNote, setNewNote] = useState('')
+  const [showAll, setShowAll] = useState(true)
 
-   const handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault()
     const newNoteToAdd =   {
       id: notes.length + 1,
@@ -15,20 +16,27 @@ function App(props) {
       important: true
     }
     setNotes([...notes, newNoteToAdd])
-   }
+  }
 
-   const handleChange = (event) => {
-     setNewNote(event.target.value)
-   }
+  const handleChange = (event) => {
+    setNewNote(event.target.value)
+  }
+
+  const filteredNotes = showAll ? notes : notes.filter(note => note.important)
+
+  const toggleImportance = () => {
+    setShowAll(!showAll)
+  }
 
   return (
     <div className="App">
       <h2>Notes</h2>
       {
-        notes.map(note => {
+        filteredNotes.map(note => {
           return <Note key={note.id} note={note} />
         })
       }
+      <button onClick={toggleImportance}>Show {showAll ? 'important' : 'all'}</button>
 
       <h2>Add a note</h2>
       <form onSubmit={handleSubmit}>
