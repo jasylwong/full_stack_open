@@ -20,12 +20,17 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault()
     const newNoteToAdd =   {
-      id: notes.length + 1,
       content: newNote,
       date: new Date().toISOString(),
       important: true
     }
-    setNotes([...notes, newNoteToAdd])
+
+    axios.post('http://localhost:3001/notes', newNoteToAdd)
+      .then(response => {
+        console.log(response)
+        setNotes([...notes, response.data])
+        setNewNote('')
+      })
   }
 
   const handleChange = (event) => {
@@ -38,12 +43,22 @@ function App() {
     setShowAll(!showAll)
   }
 
+  const toggleImportanceOfNote = (id) => {
+    const note = notes.find(note => note.id === id)
+    const amendedNote = { ...note, important: !note.important}
+
+    axios.put(`http://localhost:3001/notes/${note.id}`, amendedNote)
+      .then(response => {
+        setNotes(notes.map(note => id === note.id ? response.data : note))
+      })
+  }
+
   return (
     <div className="App">
       <h2>Notes</h2>
       {
         filteredNotes.map(note => {
-          return <Note key={note.id} note={note} />
+          return <Note key={note.id} note={note} toggleImportanceOfNote={() => toggleImportanceOfNote(note.id)}/>
         })
       }
       <button onClick={toggleImportance}>Show {showAll ? 'important' : 'all'}</button>
