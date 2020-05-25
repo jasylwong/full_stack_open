@@ -4,7 +4,7 @@
 
 ## About 
 
-This repo contains the code that I have produced so far as part of the University of Helsinki's Full stack course.
+This repo contains the code that I have produced so far as part of the University of Helsinki's [Full stack course](https://fullstackopen.com/en).
 
 The course serves as an introduction to modern web application development with JavaScript. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js. It also covers GraphQL (a modern alternative to REST APIs), testing, configuration and environment management, and the use of MongoDB for storing the application’s data.
 
