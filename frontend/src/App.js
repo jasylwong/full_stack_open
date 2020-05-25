@@ -13,26 +13,26 @@ function App() {
       .then(initialNotes => setNotes(initialNotes))
   }, [])
 
-  const handleSubmit = (event) => {
+  const addNote = (event) => {
     event.preventDefault()
-    const newNoteToAdd =   {
+    const noteObject =   {
       content: newNote,
       date: new Date().toISOString(),
-      important: true
+      important: Math.random() > 0.5
     }
 
-    noteService.create(newNoteToAdd)
-      .then(response => {
-        setNotes([...notes, response])
+    noteService.create(noteObject)
+      .then(returnedNote => {
+        setNotes([...notes, returnedNote])
         setNewNote('')
       })
   }
 
-  const handleChange = (event) => {
+  const handleNoteChange = (event) => {
     setNewNote(event.target.value)
   }
 
-  const filteredNotes = showAll ? notes : notes.filter(note => note.important)
+  const notesToShow = showAll ? notes : notes.filter(note => note.important)
 
   const toggleImportance = () => {
     setShowAll(!showAll)
@@ -40,37 +40,35 @@ function App() {
 
   const toggleImportanceOfNote = (id) => {
     const note = notes.find(note => note.id === id)
-    const amendedNote = { ...note, important: !note.important}
+    const changedNote = { ...note, important: !note.important}
 
-    noteService.update(id, amendedNote)
-      .then(response => {
-        setNotes(notes.map(note => id === note.id ? response : note))
+    noteService.update(id, changedNote)
+      .then(returnedNote => {
+        setNotes(notes.map(note => id === note.id ? returnedNote : note))
       })
       .catch(error => {
         alert(
           `the note '${note.content}' was already deleted from server`
         )
-        setNotes(notesfilter(n => n.id !== id))
+        setNotes(notes.filter(n => n.id !== id))
       })
   }
-
-  console.log(notes)
 
   return (
     <div className="App">
       <h2>Notes</h2>
+      <button onClick={toggleImportance}>Show {showAll ? 'important' : 'all'}</button><br /><br />
       {
-        filteredNotes.map(note => {
+        notesToShow.map(note => {
           return <Note key={note.id} note={note} toggleImportanceOfNote={() => toggleImportanceOfNote(note.id)}/>
         })
       }
-      <button onClick={toggleImportance}>Show {showAll ? 'important' : 'all'}</button>
 
       <h2>Add a note</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={addNote}>
         <label>
           Note:
-          <input type='text' name='name' value={newNote} onChange={handleChange}/>
+          <input type='text' name='name' value={newNote} onChange={handleNoteChange}/>
         </label>
         <input type='submit' value='Submit' />
       </form>
