@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Note from './components/Note';
-import axios from 'axios';
+import noteService from './services/notes'
 import './App.css';
 
 function App() {
@@ -9,12 +9,8 @@ function App() {
   const [showAll, setShowAll] = useState(true)
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/notes')
-      .then(response => {
-        setNotes(response.data)
-        console.log(response.data)
-      })
+    noteService.getAll()
+      .then(initialNotes => setNotes(initialNotes))
   }, [])
 
   const handleSubmit = (event) => {
@@ -25,10 +21,9 @@ function App() {
       important: true
     }
 
-    axios.post('http://localhost:3001/notes', newNoteToAdd)
+    noteService.create(newNoteToAdd)
       .then(response => {
-        console.log(response)
-        setNotes([...notes, response.data])
+        setNotes([...notes, response])
         setNewNote('')
       })
   }
@@ -47,11 +42,13 @@ function App() {
     const note = notes.find(note => note.id === id)
     const amendedNote = { ...note, important: !note.important}
 
-    axios.put(`http://localhost:3001/notes/${note.id}`, amendedNote)
+    noteService.update(id, amendedNote)
       .then(response => {
-        setNotes(notes.map(note => id === note.id ? response.data : note))
+        setNotes(notes.map(note => id === note.id ? response : note))
       })
   }
+
+  console.log(notes)
 
   return (
     <div className="App">
