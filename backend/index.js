@@ -90,6 +90,12 @@ app.delete('/api/notes/:id', (request, response) => {
   response.status(204).end()
 })
 
+const unknownEndpoint = (request, response) => {
+  response.status(404).json({ error: 'unknown endpoint' })
+}
+
+app.use(unknownEndpoint)
+
 const PORT = 3001
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
