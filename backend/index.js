@@ -1,5 +1,5 @@
-// require http
-const http = require('http')
+const express = require('express')
+const app = express()
 
 let notes = [
   {
@@ -22,19 +22,14 @@ let notes = [
   }
 ]
 
-console.log('notes: ', typeof notes)
-console.log('notes after: ', typeof JSON.stringify(notes))
-JSON.str
-
-// Create server, tell it what headers are, tell it what to show in browser
-const app = http.createServer((request, response) => {
-  response.writeHead(200, { 'Content-Type': 'application/json'})
-  response.end(JSON.stringify(notes))
+app.get('/', (request, response) => {
+  response.send('<h1>Hello world</h1>')
 })
 
-// Tell it what port to listen for 
+app.get('/api/notes', (request, response) => {
+  response.json(notes)
+})
+
 const PORT = 3001
 app.listen(PORT)
-
-// Log message to show it is running
-console.log(`Server is running on port ${PORT}`);
+console.log(`Server is running on port ${PORT}`)
