@@ -3,6 +3,16 @@ const app = express()
 
 app.use(express.json())
 
+const requestLogger = (request, response, next) => {
+  console.log('Method: ', request.method)
+  console.log('Path: ', request.path)
+  console.log('Body: ', request.body)
+  console.log('---')
+  next()
+}
+
+app.use(requestLogger)
+
 let notes = [
   {
     id: 1,
@@ -81,5 +91,6 @@ app.delete('/api/notes/:id', (request, response) => {
 })
 
 const PORT = 3001
-app.listen(PORT)
-console.log(`Server is running on port ${PORT}`)
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`)
+})
