@@ -38,7 +38,7 @@ let notes = [
   },
   {
     id: 4,
-    content: "Testing this app",
+    content: "Testing this app using package scripts",
     date: "2019-05-30T19:20:14.298Z",
     important: true
   }
