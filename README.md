@@ -10,7 +10,7 @@ The course serves as an introduction to modern web application development with 
 
 My current certificate can be found [here](https://studies.cs.helsinki.fi/stats/api/certificate/fullstackopen/en/994a1f64471fc5fa33204f9fb4b777ef). 
 
-And the live app [here](https://rocky-refuge-12673.herokuapp.com/). 
+And the live app [here](https://notes-app-fso.herokuapp.com/). 
 
 Links to my submissions for each chapter's exercises will be added as I progress.
 

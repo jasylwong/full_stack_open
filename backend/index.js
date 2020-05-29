@@ -4,6 +4,8 @@ const cors = require('cors')
 
 app.use(express.json())
 app.use(cors())
+// To make express show static content from the build repo copied from frontend:
+app.use(express.static('build'))
 
 const requestLogger = (request, response, next) => {
   console.log('Method: ', request.method)
@@ -36,7 +38,7 @@ let notes = [
   },
   {
     id: 4,
-    content: "Tester",
+    content: "Testing this app",
     date: "2019-05-30T19:20:14.298Z",
     important: true
   }
