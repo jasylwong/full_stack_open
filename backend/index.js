@@ -15,7 +15,7 @@ const requestLogger = (request, response, next) => {
   console.log('Body: ', request.body)
   console.log('---')
   next()
-}
+} 
 
 app.use(requestLogger)
 
