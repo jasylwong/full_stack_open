@@ -25,10 +25,6 @@ app.get('/api/notes', (request, response) => {
   })
 })
 
-app.get('/api/notes', (request, response) => {
-  response.json(notes)
-})
-
 app.get('/api/notes/:id', (request, response) => {
   const id = Number(request.params.id)
   const note = notes.find(note => note.id === id)
@@ -53,16 +49,17 @@ app.post('/api/notes', (request, response) => {
     return response.status(400).json({ error: 'content missing'})
   }
 
-  const note = {
-    id: generateId(),
+  const note = new Note({
     content: body.content,
     date: new Date(),
     important: body.important || false
-  }
+  })
 
-  notes = notes.concat(note)
+  // notes = notes.concat(note)
 
-  response.json(note)
+  note.save().then(savedNote => {
+    response.json(savedNote)
+  })
 })
 
 app.delete('/api/notes/:id', (request, response) => {
