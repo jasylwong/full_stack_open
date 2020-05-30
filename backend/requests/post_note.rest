@@ -2,6 +2,6 @@ POST http://localhost:3001/api/notes
 content-type: application/json
 
 {
-  "content": "Posting new note via REST client extension",
+  "content": "Testing Chrome debugger",
   "important": true
 }
