@@ -12,5 +12,8 @@ Then include it in your index.js
 
 Add procfile to tell Heroku how to start application with content: web: node index.js
 
+$ npm install eslint --save-dev
+$ node_modules/.bin/eslint --init
+
 
 
