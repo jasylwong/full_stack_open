@@ -15,8 +15,15 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   })
 
 const noteSchema = new mongoose.Schema({
-  date: Date,
-  content: String,
+  date: {
+    type: Date,
+    required: true
+  },
+  content: {
+    type: String,
+    minlength: 5,
+    required: true
+  },
   important: Boolean
 })
 
