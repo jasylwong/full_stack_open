@@ -1,19 +1,6 @@
 const mongoose = require('mongoose')
-require('dotenv').config()
-const url = process.env.MONGODB_URI
 
 mongoose.set('useFindAndModify', false)
-
-console.log('connecting to', url)
-
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(result => {
-    console.log(result)
-    console.log('connected to MongoDB')
-  })
-  .catch((error) => {
-    console.log('error connecting to MongoDB:', error.message)
-  })
 
 const noteSchema = new mongoose.Schema({
   date: {
