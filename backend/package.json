@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.j",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build:ui": "rm -rf build && cd ../frontend && npm run build && cp -r build ../backend",
     "deploy": "cd .. && git subtree push --prefix backend heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
@@ -23,6 +23,10 @@
   },
   "devDependencies": {
     "eslint": "^7.1.0",
+    "jest": "^26.0.1",
     "nodemon": "^2.0.4"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
