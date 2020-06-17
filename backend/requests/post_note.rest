@@ -2,6 +2,6 @@ POST http://localhost:3001/api/notes
 content-type: application/json
 
 {
-  "content": "Promis chaining",
-  "important": true
+  "content": "Testing the test db",
+  "important": false
 }
