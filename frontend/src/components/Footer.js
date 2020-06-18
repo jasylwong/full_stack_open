@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, created by <a href='https://github.com/jasylwong'>Jason Wong</a></em>
+      <em>Note app 2020, created by <a href='https://github.com/jasylwong'>Jason Wong</a></em>
     </div>
 
   )

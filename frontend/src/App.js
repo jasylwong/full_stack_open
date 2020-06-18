@@ -78,6 +78,7 @@ function App() {
           <input type='text' name='name' value={newNote} onChange={handleNoteChange}/>
         </label>
         <input type='submit' value='Submit' />
+        <div className='note'>(Notes must be at least 5 characters long)</div>
       </form>
       <br />
       <Footer />
