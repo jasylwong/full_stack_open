@@ -12,8 +12,6 @@ My current certificate can be found [here](https://studies.cs.helsinki.fi/stats/
 
 And the live app [here](https://notes-app-fso.herokuapp.com/). 
 
-Links to my submissions for each chapter's exercises will be added as I progress.
-
 ## Contents:
 
 <ol start="0">
