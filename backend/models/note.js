@@ -5,7 +5,6 @@ mongoose.set('useFindAndModify', false)
 const noteSchema = new mongoose.Schema({
   date: {
     type: Date,
-    required: true
   },
   content: {
     type: String,
