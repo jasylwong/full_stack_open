@@ -4,6 +4,5 @@ Content-Type: application/json
 {
   "username": "LostBoysLeader",
   "name": "Peter Pan",
-  "password": "ihatehook",
-  "notes": [{ "content": "I wear green", "important": true }]
+  "password": "ihatehook"
 }
