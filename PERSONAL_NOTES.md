@@ -182,5 +182,5 @@ Links to my submissions for each chapter's exercises will be added as I progress
   - Identifying the schema tells the server how the attached credentials should be interpreted (the Bearer schema is suitable for our needs)
 
 - Error handling
-  - 
+  - we can add an error hanlder for a JSON web token error
 
