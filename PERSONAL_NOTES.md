@@ -174,4 +174,13 @@ Links to my submissions for each chapter's exercises will be added as I progress
   - Note: the db does not actually know that the ids stored in the user field of notes reference documents in the user collection. The functionality of populate is based on the 'types' we defined in the Mongoose schema with the ref option.
 
 ### 4b: Token authentication
-- Tokens can be used for logging in, via installing jsonwebtoken
+  - Tokens can be used for logging in, via installing jsonwebtoken
+
+- Limiting creating new notes to logged in users:
+  - Creating notes is only possible if the post request has a valid token attached, and saved to the notes lit of the user id'ed by that token.
+  - The Authorization header can be used to send the token from browser to server
+  - Identifying the schema tells the server how the attached credentials should be interpreted (the Bearer schema is suitable for our needs)
+
+- Error handling
+  - 
+

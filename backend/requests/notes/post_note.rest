@@ -1,8 +1,8 @@
 POST http://localhost:3001/api/notes
 content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ikplbm55IiwiaWQiOiI1ZWY0Y2U2NjBlZDM2NDBjNWIzMjI3ZTUiLCJpYXQiOjE1OTMxMDQ0MTR9.x-r32o1yAkBgDw60N-qPl6VyWCtSwmtks54fgOAuk9I
 
 {
-  "content": "Add note for specific user",
-  "important": false,
-  "userId": "5ef36db4dc57b47767350178"
+  "content": "Using token authorization",
+  "important": false
 }
