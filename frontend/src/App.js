@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Note from './components/Note';
 import Notification from './components/Notification';
 import LoginForm from './components/LoginForm';
-import Togglable from './components/Togglable';
 import NoteForm from './components/NoteForm';
+import Togglable from './components/Togglable';
 import Footer from './components/Footer';
 import noteService from './services/notes'
 import loginService from './services/login'
@@ -93,27 +93,34 @@ function App() {
     setPassword(event.target.value)
   }
 
+  const loginForm = () => (
+    <Togglable buttonLabel='login'>
+      <LoginForm
+        handleSubmit={handleLogin}
+        handleUsernameChange={handleUsernameChange}
+        handlePasswordChange={handlePasswordChange}
+        username={username}
+        password={password}
+      />
+    </Togglable>
+  )
+
+  const noteForm = () => (
+    <Togglable buttonLabel='new note'>
+      <NoteForm createNote={addNote} />
+    </Togglable>
+  )
+
   return (
     <div className="App">
       <h1>Notes</h1>
-
       <Notification message={errorMessage} />
 
       {user === null ?
-        <Togglable buttonLabel='login'>
-          <LoginForm
-            handleSubmit={handleLogin}
-            handleUsernameChange={handleUsernameChange}
-            handlePasswordChange={handlePasswordChange}
-            username={username}
-            password={password}
-          />
-        </Togglable> :
+        loginForm() :
         <div>
           <p>{user.name} logged-in</p>
-          <Togglable buttonLabel='new note'>
-            <NoteForm createNote={addNote} />
-          </Togglable>
+          {noteForm()}
         </div>
       }
 
