@@ -86,6 +86,11 @@ function App() {
     }
   }
 
+  const logout = () => {
+    setUser(null)
+    window.localStorage.removeItem('loggedNoteAppUser')
+  }
+
   const handleUsernameChange = (event) => {
     setUsername(event.target.value)
   }
@@ -123,6 +128,8 @@ function App() {
         loginForm() :
         <div>
           <p>{user.name} logged-in</p>
+          <button onClick={logout}>logout</button>
+          <br /><br />
           {noteForm()}
         </div>
       }
