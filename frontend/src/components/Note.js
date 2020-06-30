@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 function Note({ note, toggleImportanceOfNote }) {
   return (
@@ -10,4 +10,4 @@ function Note({ note, toggleImportanceOfNote }) {
   )
 }
 
-export default Note;
+export default Note
