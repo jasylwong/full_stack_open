@@ -180,7 +180,103 @@ Links to my submissions for each chapter's exercises will be added as I progress
   - Creating notes is only possible if the post request has a valid token attached, and saved to the notes lit of the user id'ed by that token.
   - The Authorization header can be used to send the token from browser to server
   - Identifying the schema tells the server how the attached credentials should be interpreted (the Bearer schema is suitable for our needs)
+  - The token has been digitally signed using a string from the environment variable SECRET as the secret. The digital signature ensures that only parties who know the secret can generate a valid token. The value for the environment variable must be set in the .env file.
 
 - Error handling
   - we can add an error hanlder for a JSON web token error
 
+## 5 Testing React apps
+
+### 5a: Login in frontend
+  - Fixing the frontend so it allows for tokens
+  - We can create a form and use state for login, combined with a post request with the credentials
+  - A React trick for rendering things conditionally: {user === null && loginForm()}
+
+
+- Creating new notes
+  - the token returned with a successful login is saved to the application's state - the user's token field
+  - Add the token of the logged-in user to the Authorization header of the HTTP request. 
+
+- Saving the token to the brower's local storage
+  - So when we rerender a page, the login details are still available.
+  - Do this using: window.localStorage.setItem('key', 'value'). Related functions are getItem and removeItem
+  - Values saved to the storage are DOMstrings, so can't save a JS object as is. Parse it to JSON first, using JSON.stringify
+  - For the other direction, parse it back to JS using JSON.parse
+  - You can inspect local storage using the browser console or the Application tab of the browser
+  - Use an effect hook to check if details of a logged in user can already be found in local storage, and save it to our app's state
+  - As a temporary way to logout, we can use the terminal to simply clear the local storage:
+      window.localStorage.remove('key_of_variable') for individual key-value pairs, or window.localStorage.clear() for everything
+  - remove the git configuration of the cloned application: >rm -rf .git
+
+### 5b: props.children and proptypes
+
+- Displaying the login form only when appropriate
+
+- The components children, aka props.children
+  - props.children are used for referencing the child components of a component
+  - For this, we have to add a closing tag for the parent component (see Togglable component for example)
+
+- State of the forms
+  - The React docs say when several components need to reflect the same changing data, we should lift the shared state up to their closest common ancestor
+
+- References to components with ref
+  - We can access variables inside of a component from outside of that component using React's ref mechanism.
+  - The useRef hook is used to create a ref, which acts as a reference to the component. It ensures the same ref is kept throughout re-renders of the component.
+  - This is used with the useImperativeHandle hook, and a forwardRef function.
+  - Note: we could have done this cleaner using class components.
+
+- One point about components
+  - When using components similar to Togglable, each instant will have their own separate state
+
+- PropTypes
+  - We can enforce expectation and requirement of a component's props using the prop-types package
+    - After installing it, we can adding a .propTypes property to the component.
+  - The app still works if the prop doesn't conform, but produces an error message which is bad practice.
+  
+- ESlint (for the frontend)
+  - Create-react-app has installed ESlint to the project by default
+  - NB: Do not run the eslint --init command.  It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+  - Simply create the .eslintrc.js file manually
+  - npm add --save-dev eslint-plugin-jest to avoid undesired and irrelevant linter errors
+  - NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add additional workspace setting for it to work. If you are seeing Failed to load plugin react: Cannot find module 'eslint-plugin-react', additional configuration is needed. Adding line "eslint.workingDirectories": [{ "mode": "auto" }] to settings.json in the workspace seems to work. 
+  - Create an .eslintignore file to ignore node_modules and build directories
+
+### 5c Testing React apps
+There are many different ways to test React. Here, we will use:
+  - Jest
+  - react-testing-library for rendering components for testing purposes (install @testing-library/react & @testing-library/jest-dom if not already)
+
+- Rendering the component for tests
+  - Test for individual components usually go in same folder as the component
+  - Using the render method, we can render components in a format suitable for tests without rendering them to the actual DOM.
+  - render returns an object with several properties. For example, the container property contains all the HTML rendered by the component.
+
+- Searching for content in a component
+  - Thereare multiple ways to investigate the content of components being tested
+    - eg by container content, .getByText, .querySelector (see testing library site for more types of queries)
+
+- Debugging tests
+  - We can print to the console the HTML rendered by the component by using .debug() on an instance of it
+  - Search for smaller parts by importing prettyDOM from @testing-library/dom
+    - eg console.log(prettyDOM(htmltagexample))
+
+- Clicking buttons in tests
+  - Test event handlers by importing fireEvent from @testing-library/react
+  - and defining a mock function with Jest
+
+- Tests for the Togglable component
+
+- Testing the forms
+  - can be done by using the .change and .submit methods of fireEvent
+
+- Test coverage
+  - can be given by using: CI=true npm test -- --coverage
+  - A quite primitive HTML report will be generated to the coverage/lcov-report directory.
+
+- Frontend integration tests
+  - Integration testing tests the collaboration of multiple components. 
+
+- Snapshot testing
+  - As opposed to traditional testing, we don't need to define any tests themselves - it is simplyn enough to adopt snapshot testing
+  - It compares the HTML code defined by components after they have changed versus the code before it changed
+  - Any changes will be due to either new functionality or a bug - and the developer can tell Jest if the change was desired or not. If not, it strongly implicates a bug.
