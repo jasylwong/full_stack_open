@@ -280,3 +280,31 @@ There are many different ways to test React. Here, we will use:
   - As opposed to traditional testing, we don't need to define any tests themselves - it is simplyn enough to adopt snapshot testing
   - It compares the HTML code defined by components after they have changed versus the code before it changed
   - Any changes will be due to either new functionality or a bug - and the developer can tell Jest if the change was desired or not. If not, it strongly implicates a bug.
+
+### 5d End to End (E2E) testing 
+  - Testing the system as a whole
+  - Using a browser and a testing library eg Selenium, Cypress
+  - Testing of system through same interface as user
+  - Drawbacks: more complex than unit tests, slow, and can be flaky (may pass and fail on same code)
+
+- Cypress
+  - Easier to use than Selenium
+  - Unlike other testing libraries which are run in a Node process, Cypress is run in the browser
+  - Cypress tests can be in either the frontend, backend or separate repository
+  - install in the frontend: npm i --save-dev cypress
+  - The tests require the tested system to be running, so add a script to the backend package.json:
+    - "start:test": "cross-env NODE_ENV=test node index.js"
+  - When we run it (in the frontend since that's where we installed it), it creates a Cypress directory
+  - It uses Mocha under the hood, so we can use describe, it etc
+  - It allows use of Cypress commands such as cy.visit, cy.contains etc
+  - 
+
+- Writing to a form
+  - cy.get('#login-button'), cy.type('hello world)
+
+- Some things to note
+  - Get rid of unnecessary ESlint notifications by installing: npm install eslint-plugin-cypress --save-dev
+  - And add "cypress/globals": true to the env variables in the eslintrc.js config file, and "cypress" to the "plugins" variables
+
+- Testing new note form
+  - All changes to the browser's state are reversed after each test
