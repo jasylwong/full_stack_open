@@ -308,3 +308,6 @@ There are many different ways to test React. Here, we will use:
 
 - Testing new note form
   - All changes to the browser's state are reversed after each test
+
+- Controlling the state of the database
+  - 
