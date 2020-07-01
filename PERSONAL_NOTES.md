@@ -294,6 +294,7 @@ There are many different ways to test React. Here, we will use:
   - install in the frontend: npm i --save-dev cypress
   - The tests require the tested system to be running, so add a script to the backend package.json:
     - "start:test": "cross-env NODE_ENV=test node index.js"
+    - and make sure we run this rather than "npm run dev"
   - When we run it (in the frontend since that's where we installed it), it creates a Cypress directory
   - It uses Mocha under the hood, so we can use describe, it etc
   - It allows use of Cypress commands such as cy.visit, cy.contains etc
@@ -310,4 +311,9 @@ There are many different ways to test React. Here, we will use:
   - All changes to the browser's state are reversed after each test
 
 - Controlling the state of the database
-  - 
+  - As with unit and integration tests, we should empty then format the database before running tests
+  - Since E2E tests don't have access to the db, create API endpoints to the backend for the test by creating a new (controller) router for testing
+    - and add it to the backend only if the app is run on test-mode
+  - Amend the beforeEach in the test file so that it 
+    - resets the db eg cy.request('POST', 'hcy.request('POST', 'http://localhost:3001/api/testing/reset'))
+    - and creates seed users/notes eg cy.request('POST', 'http://localhost:3001/api/users/', user)
