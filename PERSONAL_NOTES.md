@@ -317,3 +317,7 @@ There are many different ways to test React. Here, we will use:
   - Amend the beforeEach in the test file so that it 
     - resets the db eg cy.request('POST', 'hcy.request('POST', 'http://localhost:3001/api/testing/reset'))
     - and creates seed users/notes eg cy.request('POST', 'http://localhost:3001/api/users/', user)
+
+- Failed login test
+  - run only a single Cypress test usting .only (eg. it.only)
+  - We can chain cypress functions

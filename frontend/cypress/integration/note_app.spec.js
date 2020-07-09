@@ -55,4 +55,19 @@ describe('Note app', function() {
       })
     })
   })
+
+  it('login fails with wrong password', function() {
+    cy.contains('login').click()
+    cy.get('#username').type('Cypress Testguy')
+    cy.get('#password').type('wrong')
+    cy.get('#login-button').click()
+
+    cy.contains('Wrong credentials')
+    cy.get('.error')
+      .contains('Wrong credentials')
+      .and('have.css', 'color', 'rgb(255, 0, 0)')
+      .and('have.css', 'border-style', 'solid')
+
+    cy.get('html').should('not.contain', 'Cypress Testguy logged in')
+  })
 })
