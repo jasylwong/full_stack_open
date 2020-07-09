@@ -327,3 +327,4 @@ There are many different ways to test React. Here, we will use:
   - Rather, we should bypass the UI and HTTP request to the backened to login. This is faster than filling in a form.
     - This involves putting the credentials in the cy.request parameters
   - Under the hood, all Cypress commands are promises
+  - Create custom commands in cypress/support/commands.js, for example if we use the bypass ui login code in multiple places
