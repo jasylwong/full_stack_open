@@ -37,19 +37,27 @@ describe('Note app', function() {
 
     describe('and a note exists', function() {
       beforeEach(function() {
-        // cy.contains('new note').click()
-        // cy.get('#content').type('another note cypress')
-        // cy.contains('save').click()
         cy.createNote({ content: 'another note cypress', important: false })
       })
 
       it('can be made important', function() {
-        cy.contains('another note cypress')
-          .contains('Make important')
-          .click()
-
-        cy.contains('another note cypress')
+        cy.contains('another note cypress').parent().find('button').click()
+        cy.contains('another note cypress').parent().find('button')
           .contains('Make not important')
+      })
+    })
+
+    describe('and several notes exist', function() {
+      beforeEach(function() {
+        cy.createNote({ content: 'first note', important: false })
+        cy.createNote({ content: 'second note', important: false })
+        cy.createNote({ content: 'third note', important: false })
+      })
+
+      it('one of those can be made important', function() {
+        cy.contains('second note').parent().find('button').as('theButton')
+        cy.get('@theButton').click()
+        cy.get('@theButton').should('contain', 'Make not important')
       })
     })
   })

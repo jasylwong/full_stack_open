@@ -328,3 +328,7 @@ There are many different ways to test React. Here, we will use:
     - This involves putting the credentials in the cy.request parameters
   - Under the hood, all Cypress commands are promises
   - Create custom commands in cypress/support/commands.js, for example if we use the bypass ui login code in multiple places
+
+- Changing the importance of a note
+  - When a html element or tag is nested inside something, you can use .parent() and then look inside that.
+  - .as('variableName') can be used to help keep code DRY, by assigning a temporary variable name to the element being referred to, then accessed using cy.get('@variableName')

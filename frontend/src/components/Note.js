@@ -4,7 +4,8 @@ function Note({ note, toggleImportanceOfNote }) {
   return (
     <>
       <li className='note'>
-        {note.content}<button onClick={toggleImportanceOfNote}>{note.important ? 'Make not important' : 'Make important'}</button>
+        <span>{note.content}</span>
+        <button onClick={toggleImportanceOfNote}>{note.important ? 'Make not important' : 'Make important'}</button>
       </li>
     </>
   )
