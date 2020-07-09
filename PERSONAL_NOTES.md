@@ -326,9 +326,14 @@ There are many different ways to test React. Here, we will use:
   - We only need to test the login flow once, rather than at the start of each test or in a beforeEach block
   - Rather, we should bypass the UI and HTTP request to the backened to login. This is faster than filling in a form.
     - This involves putting the credentials in the cy.request parameters
-  - Under the hood, all Cypress commands are promises
+  - Under the hood, all Cypress commands are like promises
   - Create custom commands in cypress/support/commands.js, for example if we use the bypass ui login code in multiple places
 
 - Changing the importance of a note
   - When a html element or tag is nested inside something, you can use .parent() and then look inside that.
   - .as('variableName') can be used to help keep code DRY, by assigning a temporary variable name to the element being referred to, then accessed using cy.get('@variableName')
+
+- Running and debugging the test
+ - Note Cypress does not work exactly like standard JS. Every command always returns undefined.
+ - Cypress can be run using the graphical test runner in a visual browser, or from the command line using the npm script: cypress run
+  - Note that this saves the video of the test execution to cypress/videos/, so .gitignore this
