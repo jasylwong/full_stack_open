@@ -321,3 +321,9 @@ There are many different ways to test React. Here, we will use:
 - Failed login test
   - run only a single Cypress test usting .only (eg. it.only)
   - We can chain cypress functions
+
+- Bypassing the UI
+  - We only need to test the login flow once, rather than at the start of each test or in a beforeEach block
+  - Rather, we should bypass the UI and HTTP request to the backened to login. This is faster than filling in a form.
+    - This involves putting the credentials in the cy.request parameters
+  - Under the hood, all Cypress commands are promises
