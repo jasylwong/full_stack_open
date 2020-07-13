@@ -363,7 +363,16 @@ Moving state management outside of React components using the currently most pop
   - when state in the store is changed, React is unable to auto re-render, so we need to register a function which listens for changes in the store with the subscribe method and re-renders for us.
 
 #### Redux-notes
-- 
+#### Pure functions, immutable
+- Reducers should be pure functions ie they do not cause any side effects, and must always return the same response when called with the same parameters.
+- Reducer states should also be composed of immutable objects. If there is a change in state, the old object should not be changed, but replaced with a new, changed, object.
+- library deep-freeze ensures reducers are correctly defined as immutable functions, using the function deepFreeze(state)
+- we can test reducers using jest in the normal way.
+  - If we put in some test data, we can use eg expect(storeName).toHaveLength(1)
+  - or expect(storeName).toContainEqual(state[0])
+
+#### Array spread syntax
+
 
 ### 6b: Many reducers
 
