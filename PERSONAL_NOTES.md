@@ -372,6 +372,9 @@ Moving state management outside of React components using the currently most pop
   - or expect(storeName).toContainEqual(state[0])
 
 #### Array spread syntax
+- The spread syntax can be used to break up an array into individual elements
+- When we take elements from an array by destructuring, we can also gather the rest of the elements
+
 
 
 ### 6b: Many reducers
