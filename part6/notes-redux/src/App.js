@@ -1,14 +1,7 @@
 import React from 'react';
 import { createStore } from 'redux'
+import noteReducer from './reducers/noteReducer'
 import './App.css';
-
-const noteReducer = (state=[], action) => {
-  if (action.type === 'NEW_NOTE') {
-    return state.concat(action.data)
-  }
-
-  return state
-}
 
 const store = createStore(noteReducer)
 
@@ -29,8 +22,6 @@ store.dispatch({
     id: 2
   }
 })
-
-console.log(store.getState())
 
 function App() {
   return (
