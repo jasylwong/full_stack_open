@@ -295,8 +295,8 @@ There are many different ways to test React. Here, we will use:
   - The tests require the tested system to be running, so add a script to the backend package.json:
     - "start:test": "cross-env NODE_ENV=test node index.js"
     - and make sure we run this rather than "npm run dev"
-  - When we run it (in the frontend since that's where we installed it), it creates a Cypress directory
-  - It uses Mocha under the hood, so we can use describe, it etc
+  - When we run the script "npm run cypress:open" (in the frontend since that's where we installed it), it creates a Cypress directory
+  - It uses Mocha under the hood, so we can use describe, it, etc
   - It allows use of Cypress commands such as cy.visit, cy.contains etc
   - 
 
@@ -337,3 +337,36 @@ There are many different ways to test React. Here, we will use:
  - Note Cypress does not work exactly like standard JS. Every command always returns undefined.
  - Cypress can be run using the graphical test runner in a visual browser, or from the command line using the npm script: cypress run
   - Note that this saves the video of the test execution to cypress/videos/, so .gitignore this
+
+---
+## 6: State management with Redux
+Moving state management outside of React components using the currently most popular solution, Redux.
+
+### 6a: Flux-architecture and Redux
+#### Flux-architecture
+- In Flux, state is separated completely from the components into its own stores. State in the store is not changed directly, but with  different actions.
+- When an action changes the state of the store, the views are re-rendered:
+  Action -> Dispatcher -> Store -> View
+- If an action, eg pushing a button, causes the need to change the starte, this causes a re-render again.
+- Flux manages how and where the application's state is kept, and how it is modified.
+
+#### Redux
+- Redux works with the same principle as Flux, but is simpler
+- install Redux: npm i redux
+- The whole state of the app is stored in a single JS object in the store
+- The state of the store is changed with actions. These are objects which have at least a field which determines the type of the action, eg type: 'INCREMENT'
+- The impact of the action to the state of the application is defined using a reducer.
+  - it is a function which is given the current state and an action as parameters, and returns a new state
+  - createStore function from redux is used to create the store from the reducer, which handles actions by dispatching/sending thme to the store with the dispatch method eg store_name.dispatch({type: 'INCREMENT'})
+  - The state of the store can be found by using getState eg store.getState()
+  - function subscribe is used to create callback functions the store calls when its state is changed
+  - when state in the store is changed, React is unable to auto re-render, so we need to register a function which listens for changes in the store with the subscribe method and re-renders for us.
+
+#### Redux-notes
+- 
+
+### 6b: Many reducers
+
+### 6c: Communicating with server in a redux application
+
+### 6d: Connect
