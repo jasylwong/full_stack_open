@@ -1,73 +1,42 @@
-// import React from 'react';
-// import { createStore } from 'redux'
-// import noteReducer from './reducers/noteReducer'
-// import './App.css';
+import React from 'react';
+import { createNote, toggleImportanceOf } from './reducers/noteReducer'
+import { useSelector, useDispatch } from 'react-redux'
+import './App.css';
 
-// const store = createStore(noteReducer)
+function App() {
+  const dispatch = useDispatch()
+  const notes = useSelector(state => state)
 
-// store.dispatch({
-//   type: 'NEW_NOTE',
-//   data: {
-//     content: 'hello world',
-//     important: true,
-//     id: 1
-//   }
-// })
+  const addNote = (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+    dispatch(createNote(content))
+  }
 
-// store.dispatch({
-//   type: 'NEW_NOTE',
-//   data: {
-//     content: 'how are you?',
-//     important: true,
-//     id: 2
-//   }
-// })
+  const toggleImportance = (id) => {
+    dispatch(toggleImportanceOf(id))
+  }
 
-// const generateId = () => {
-//   Number((Math.random() * 1000000).toFixed(0))
-// }
+  return (
+    <div className="App">
+      <form onSubmit={addNote}>
+        <input name="note" />
+        <button type="submit">add</button>
+      </form>
+      <ul>
+        {notes.map(note =>
+          <li
+            key={note.id}
+            onClick={() => toggleImportance(note.id)}
+          >
+            {note.content} <strong>{note.important ? 'important' : ''}</strong>
+          </li>
+        )}
+      </ul>
+    </div>
+  );
+}
 
-// function App() {
-//   const addNote = (event) => {
-//     event.preventDefault()
-//     const content = event.target.note.value
-//     event.target.note.value = ''
-//     store.dispatch({
-//       type: 'NEW_NOTE',
-//       data: {
-//         content,
-//         important: false,
-//         id: generateId()
-//       }
-//     })
-//   }
+export default App;
 
-//   const toggleImportance = (id) => {
-//     console.log('testing importance toggling')
-//     store.dispatch({
-//       type: 'TOGGLE_IMPORTANCE',
-//       data: { id }
-//     })
-//   }
-
-//   return (
-//     <div className="App">
-//       <form onSubmit={addNote}>
-//         <input name="note" />
-//         <button type="submit">add</button>
-//       </form>
-//       <ul>
-//         {store.getState().map(note =>
-//           <li 
-//             key={note.id}
-//             onClick={() => toggleImportance(note.id)}
-//           >
-//             {note.content} <strong>{note.important ? 'important' : ''}</strong>
-//           </li>
-//         )}
-//       </ul>
-//     </div>
-//   );
-// }
-
-// export default App;

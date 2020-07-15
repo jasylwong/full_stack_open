@@ -375,7 +375,22 @@ Moving state management outside of React components using the currently most pop
 - The spread syntax can be used to break up an array into individual elements
 - When we take elements from an array by destructuring, we can also gather the rest of the elements
 
+#### Uncontrolled form
+- Forms where the state of the form fields are not bound to the state of the component
 
+#### Action creators
+- It is not necessary for React components to know the Redux action types and forms, so we can separate actions into their own functions
+- Functions that create actions are called action creators
+
+#### Forwarding Redux-store to various components
+- We can share the redux-store with components using the hooks-api after installing the react-redux library
+- The application (ie the App component in index.js) has to be defined as a child of a Provider component provided by the react-redux library, with the application's store given to the provider as its attribute store
+- If the application has many components which need the store, the App-component must pass store as props to all of those components.
+- A module can have only one default export, but multiple 'normal' exports, which can be imported using the curly brace syntax 
+  - eg import { createNote } from './../reducers/noteReducer'
+- the useDispatch() hook can replace the store.dispatch() function
+  - this provides any React component access to the dispatch-function of the redux-store defined in index.js, allowing all components to make changes to the state of the redux-store.
+- the component can access the notes stored in the store with the useSelector hook of the react-redux library, which receives a function as a parameter.
 
 ### 6b: Many reducers
 
