@@ -392,6 +392,9 @@ Moving state management outside of React components using the currently most pop
   - this provides any React component access to the dispatch-function of the redux-store defined in index.js, allowing all components to make changes to the state of the redux-store.
 - the component can access the notes stored in the store with the useSelector hook of the react-redux library, which receives a function as a parameter.
 
+#### More components
+
+
 ### 6b: Many reducers
 
 ### 6c: Communicating with server in a redux application
