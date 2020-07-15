@@ -393,7 +393,8 @@ Moving state management outside of React components using the currently most pop
 - the component can access the notes stored in the store with the useSelector hook of the react-redux library, which receives a function as a parameter.
 
 #### More components
-
+- presentational components aren't aware the event handler it gets as props dispatches an action
+- container components are those that contain some application logic; it defines what the event handlers of its child components do, and coordinates the config of presentational components
 
 ### 6b: Many reducers
 
