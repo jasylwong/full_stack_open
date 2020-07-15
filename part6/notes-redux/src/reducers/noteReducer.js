@@ -9,6 +9,7 @@ const noteReducer = (state=[], action) => {
         ...noteToChange,
         important: !noteToChange.important
       }
+      const notesArray = state.map(n => n.id !== id ? n : changedNote)
       return state.map(n => n.id !== id ? n : changedNote)
     default:
       return state

@@ -1,17 +1,77 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { createStore } from 'redux'
+import noteReducer from './reducers/noteReducer'
+import './App.css';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const store = createStore(noteReducer)
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+store.dispatch({
+  type: 'NEW_NOTE',
+  data: {
+    content: 'hello world',
+    important: true,
+    id: 1
+  }
+})
+
+store.dispatch({
+  type: 'NEW_NOTE',
+  data: {
+    content: 'how are you?',
+    important: true,
+    id: 2
+  }
+})
+
+const generateId = () => 
+  Number((Math.random() * 1000000).toFixed(0))
+
+function App() {
+  const addNote = (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+    store.dispatch({
+      type: 'NEW_NOTE',
+      data: {
+        content,
+        important: false,
+        id: generateId()
+      }
+    })
+  }
+
+  const toggleImportance = (id) => {
+    store.dispatch({
+      type: 'TOGGLE_IMPORTANCE',
+      data: { id }
+    })
+  }
+
+  return (
+    <div className="App">
+      <form onSubmit={addNote}>
+        <input name="note" />
+        <button type="submit">add</button>
+      </form>
+      <ul>
+        {store.getState().map(note =>
+          <li 
+            key={note.id}
+            onClick={() => toggleImportance(note.id)}
+          >
+            {note.content} <strong>{note.important ? 'important' : ''}</strong>
+          </li>
+        )}
+      </ul>
+    </div>
+  );
+}
+
+const renderApp = () => {
+  ReactDOM.render(<App />, document.getElementById('root'))
+}
+
+renderApp()
+store.subscribe(renderApp)
