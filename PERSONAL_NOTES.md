@@ -402,6 +402,9 @@ Moving state management outside of React components using the currently most pop
 - combine two existing reducers with the combineReducers function
 - combined reducers work in such a way that every action gets handled in every part of the combined reducer.
 
+#### Finishing the filters
+- 
+
 ### 6c: Communicating with server in a redux application
 
 ### 6d: Connect
