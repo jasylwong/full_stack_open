@@ -398,7 +398,9 @@ Moving state management outside of React components using the currently most pop
 
 ### 6b: Many reducers
 #### Store with complex state
-- 
+#### Combined reducers
+- combine two existing reducers with the combineReducers function
+- combined reducers work in such a way that every action gets handled in every part of the combined reducer.
 
 ### 6c: Communicating with server in a redux application
 
