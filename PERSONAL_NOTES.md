@@ -397,6 +397,8 @@ Moving state management outside of React components using the currently most pop
 - container components are those that contain some application logic; it defines what the event handlers of its child components do, and coordinates the config of presentational components
 
 ### 6b: Many reducers
+#### Store with complex state
+- 
 
 ### 6c: Communicating with server in a redux application
 
