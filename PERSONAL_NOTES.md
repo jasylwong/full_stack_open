@@ -403,8 +403,12 @@ Moving state management outside of React components using the currently most pop
 - combined reducers work in such a way that every action gets handled in every part of the combined reducer.
 
 #### Finishing the filters
-- 
+#### Redux DevTools
+- This Chrome extension allows monitoring of the Redux-store and the action that changes it on the browser console
+- the library redux-devtools-extension can also be used
+
 
 ### 6c: Communicating with server in a redux application
+- We can use dispatch as one of the parameters in the useEffect hook
 
 ### 6d: Connect
