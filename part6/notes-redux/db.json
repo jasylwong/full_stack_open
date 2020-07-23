@@ -24,6 +24,11 @@
       "content": "testing redux-thunk",
       "important": false,
       "id": 5
+    },
+    {
+      "content": "testing redux-thunk again",
+      "important": false,
+      "id": 6
     }
   ]
 }

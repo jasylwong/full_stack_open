@@ -19,13 +19,13 @@ const noteReducer = (state = [], action) => {
   }
 }
 
-const generateId = () =>
-  Number((Math.random() * 1000000).toFixed(0))
-
-export const createNote = (data) => {
-  return {
-    type: 'NEW_NOTE',
-    data
+export const createNote = (content) => {
+  return async dispatch => {
+    const newNote = await noteService.createNew(content)
+    dispatch({
+      type: 'NEW_NOTE',
+      data: newNote,
+    })
   }
 }
 
