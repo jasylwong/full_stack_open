@@ -19,6 +19,11 @@
       "content": "testing comms with server 2",
       "important": false,
       "id": 4
+    },
+    {
+      "content": "testing redux-thunk",
+      "important": false,
+      "id": 5
     }
   ]
 }
