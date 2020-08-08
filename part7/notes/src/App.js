@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
 
 import {
   BrowserRouter as Router,
@@ -60,6 +59,7 @@ const Login = (props) => {
   const onSubmit = (event) => {
     event.preventDefault()
     props.onLogin('mluukkai')
+    console.log(history)
     history.push('/')
   }
 
