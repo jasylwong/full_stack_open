@@ -407,8 +407,58 @@ Moving state management outside of React components using the currently most pop
 - This Chrome extension allows monitoring of the Redux-store and the action that changes it on the browser console
 - the library redux-devtools-extension can also be used
 
-
 ### 6c: Communicating with server in a redux application
 - We can use dispatch as one of the parameters in the useEffect hook
 
-### 6d: Connect
+#### Asynchronous actions and redux thunk
+- It is better that comms with the server happens outside the components
+- Use redux-thunk library (an eg of redux-middleware) to create asynchronous actions
+  - it allows us to define action creators so that they can return a function having the dispatch-method of redux-store as its parameter
+
+### 6d: Connect (SKIPPED THIS PART DUE TO THE USAGE BEING OUTDATED)
+- An older way of using redux is via the connect-function provided by react-redux, as opposed to the new and simpler useSelector and useDispatch
+
+
+## 7: React Router, custom hooks, styling app with CSS and webpack
+### 7a: React-router
+#### Application navigation structure
+- React router-library provides solution for managing navigation in a React application
+  - npm i react-router-dom
+  - Ordering of Routes in a Switch tag is important, that with path="/" should not go first.
+#### Parameterized route
+  - We can set the path in a Route tag like express for particular ids
+    - eg path="/notes/:id"
+  - This can be accessed using eg id = useParams().id in a single Note component
+    - .useParams() comes from react-router-dom
+
+#### useHistory
+- useHistory (hook function) used to modify browser's url programmatically.
+- .push('/') changes url to "/" and the app renders the corresponding component
+
+#### Parameterized route revisited
+- Use useRouteMatch hook to help get the id of something to be displayed
+- It needs to be outside the component which defines the routed part of the app.
+
+### 7b: Custom hooks
+#### Hooks
+  Rules for React hooks: https://reactjs.org/docs/hooks-rules.html
+  Main ones: 
+    - Don’t call Hooks inside loops, conditions, or nested functions. Instead, always use Hooks at the top level of your React function.
+    - Don’t call Hooks from regular JavaScript functions. Instead, you can:
+      - Call Hooks from React function components.
+      - Call Hooks from custom Hooks
+
+#### Custom hooks
+- Primary purpose of custome hooks is to facilitate reuse of logic used in components
+- They are regular JS functions that can use any other hooks (subject to above rules)
+- Their names must start with word 'use'
+- Hooks can be reused in the same component/application and each will have separate states
+- They can be used to simplify forms
+
+
+
+
+### More about styles
+### Webpack
+### Class components, Miscellaneous
+### Exercises: extending the bloglist

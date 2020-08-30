@@ -29,7 +29,7 @@ export const createNote = (content) => {
   }
 }
 
-export const initializeNotes = (notes) => {
+export const initializeNotes = () => {
   return async dispatch => {
     const notes = await noteService.getAll()
     dispatch({
