@@ -455,6 +455,15 @@ Moving state management outside of React components using the currently most pop
 - Hooks can be reused in the same component/application and each will have separate states
 - They can be used to simplify forms
 
+#### Spread attributes
+- Use spread syntax to pass all the props at once eg. `<input {...name} />`
+- Custom hooks are not only a tool for reuse, but also better way of dividing our code into smaller modular parts
+
+#### More about hooks
+- See [website](https://fullstackopen.com/en/part7/custom_hooks#custom-hooks) for more helpful material links
+
+
+
 
 
 
