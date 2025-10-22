@@ -117,13 +117,15 @@ c Component state, event handlers
 
   b Deploying app to internet
   - Same origin policy and CORS
-  - 
-  -
-  -
-  -
-  -
-  -
-  -
+  - Application to the Internet
+  - Frontend production build
+    - `npm run build`
+  - Serving static files from the backend
+  - The whole app to the internet
+  - Streamlining deploying of the frontend
+  - Proxy
+  - Exercises 3.9 - 3.11
+    https://full-stack-open-phonebook-mxht.onrender.com/api/persons
 
   c
 
