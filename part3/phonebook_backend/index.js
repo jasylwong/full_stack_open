@@ -1,5 +1,7 @@
+require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
+const Person = require('./models/person')
 
 const app = express()
 
@@ -42,18 +44,17 @@ app.get('/info', (request, response) => {
 })
 
 app.get('/api/persons', (request, response) => {
-  response.json(persons)
+  Person.find({}).then(persons =>{
+    response.json(persons)
+  })
 })
 
 app.get('/api/persons/:id', (request, response) => {
   const id = request.params.id
-  const person = persons.find(person => person.id === id)
 
-  if (person) {
+  Person.findById(request.params.id).then(person => {
     response.json(person)
-  } else {
-    response.status(404).end()
-  }
+  })
 })
 
 app.post('/api/persons', (request, response) => {
@@ -68,14 +69,14 @@ app.post('/api/persons', (request, response) => {
     return response.status(409).json({ error: 'name must be unique!' })
   }
 
-  const person = {
-    id: `${Math.floor(Math.random() * 1001)}`,
-    name: body.name,
-    number: body.number
-  }
+  const person = new Person({
+    "name": body.name,
+    "number": body.number
+  })
 
-  persons = persons.concat(person)
-  response.json(person)
+  person.save().then(result => {
+    response.json(person)
+  })
 })
 
 app.delete('/api/persons/:id', (request, response) => {
