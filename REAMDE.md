@@ -127,6 +127,27 @@ c Component state, event handlers
   - Exercises 3.9 - 3.11
     https://full-stack-open-phonebook-mxht.onrender.com/api/persons
 
-  c
+  c Saving data to MongoDB
+  - Debugging Node applications
+    - Be systematic, logging to the console, Postman, debuggers, Developer console, question everything
+    - Worst strategy: continue writing code 
+  - MongoDB: Document database, under the NoSQL umbrella term
+  - Schema
+  - Creating and saving objects
+  - Fetching objects from the database
+  - 3.12
+  - Connecting the backend to a database
+  - Moving db configuration to its own module
+  - Defining the environment variables using the dotenv library
+  - Using database in route handlers
+  - Verifying frontend and backend integration
+    - When backend gets expanded, good idea to test the backend first with the browser, Postman or the VS Code REST client. Highly inefficient to test things exclusively through the frontend.
+  - A true full stack developer's oath
+  - Exercises 3.13 - 3.14
+  - Error handling
+  - 
+  - 
+  - 
+  - 
 
   d
