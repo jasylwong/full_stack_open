@@ -145,8 +145,8 @@ c Component state, event handlers
   - A true full stack developer's oath
   - Exercises 3.13 - 3.14
   - Error handling
-  - 
-  - 
+  - Moving error handling into middleware
+  - The order of middleware loading
   - 
   - 
 
