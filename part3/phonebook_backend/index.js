@@ -50,8 +50,6 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/api/persons/:id', (request, response) => {
-  const id = request.params.id
-
   Person.findById(request.params.id).then(person => {
     response.json(person)
   })
@@ -76,6 +74,16 @@ app.post('/api/persons', (request, response) => {
 
   person.save().then(result => {
     response.json(person)
+  })
+})
+
+app.put('/api/persons/:id', (request, response) => {    
+  Person.findById(request.params.id).then(person => {
+    person.number = request.body.number
+
+    person.save().then(result => {
+      response.json(person)
+    })
   })
 })
 
