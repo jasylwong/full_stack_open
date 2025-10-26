@@ -147,7 +147,7 @@ c Component state, event handlers
   - Error handling
   - Moving error handling into middleware
   - The order of middleware loading
-  - 
+  - Other operations
   - 
 
   d
