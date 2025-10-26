@@ -148,6 +148,6 @@ c Component state, event handlers
   - Moving error handling into middleware
   - The order of middleware loading
   - Other operations
-  - 
+  - Exercises 3.15 - 3.18
 
   d
