@@ -2,7 +2,7 @@ POST http://localhost:3001/api/notes/ HTTP/1.1
 content-type: application/json
 
 {
-  "content": "Ensure everything still works",
+  "content": "Longer than 5",
   "important": true
 }
 

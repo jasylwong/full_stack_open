@@ -150,4 +150,5 @@ c Component state, event handlers
   - Other operations
   - Exercises 3.15 - 3.18
 
-  d
+  d Validation and ESLint
+  - Deploying the database backend to production
