@@ -37,12 +37,16 @@ const App = () => {
       }
     } else {
       const new_person = { name: newName, number: newNumber }
-      personService.create(new_person).then(response => {        
-        setPersons(persons.concat(response.data))
-        setNewName('')
-        setNewNumber('')
-        setNotification({ message: `Added ${newName}` })
-      })
+      personService.create(new_person)
+        .then(response => {        
+          setPersons(persons.concat(response.data))
+          setNewName('')
+          setNewNumber('')
+          setNotification({ message: `Added ${newName}` })
+        })
+        .catch(error => {
+          setNotification({ message: error.response.data.error, isError: true })
+        })
       setTimeout(() => {
         setNotification({ message: null })
       }, 5000)

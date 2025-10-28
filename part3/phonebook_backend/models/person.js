@@ -11,7 +11,7 @@ const personSchema = new mongoose.Schema({
     type: String,
     minLength: 3,
     required: true
-  }, 
+  },
   number: {
     type: String,
     minlength: 8,
@@ -20,7 +20,7 @@ const personSchema = new mongoose.Schema({
       validator: v => /^\d{2,3}-\d+$/.test(v),
       message: () =>
         'Number must be ≥8 characters long and contain a hyphen after the second or third digit (e.g. 040-6655678)'
-    } 
+    }
   }
 })
 

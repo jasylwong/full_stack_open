@@ -152,3 +152,9 @@ c Component state, event handlers
 
   d Validation and ESLint
   - Deploying the database backend to production
+  - Exercises 3.19 - 3.21
+  - Lint
+  - Formatting the Configuration File
+  - Running the Linter
+  - Adding More Style Rules
+  - Exercise 3.22
