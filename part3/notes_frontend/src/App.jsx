@@ -41,7 +41,6 @@ const App = () => {
       }, 5000)
       setNotes(notes.filter(n => n.id !== id))
     })
-
   }
 
   const addNote = (event) => {
@@ -50,10 +49,19 @@ const App = () => {
       content: newNote, important: Math.random() < 0.5
     }
 
-    noteService.create(noteObject).then(returnedNote => {
-      setNotes(notes.concat(returnedNote))
-      setNewNote('')
-    })
+    noteService.create(noteObject)
+      .then(returnedNote => {
+        setNotes(notes.concat(returnedNote))
+        setNewNote('')
+      })
+      .catch(() => {
+        setErrorMessage(
+           'Note must be at least 5 characters'
+        )
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      })
   }
 
   const handleNoteChange = (event) => {

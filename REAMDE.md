@@ -158,3 +158,11 @@ c Component state, event handlers
   - Running the Linter
   - Adding More Style Rules
   - Exercise 3.22
+
+  Part 4: Testing Express servers, user administration
+  a Structure of backend application, introduction to testing
+  - Project structure
+  - 
+  - 
+  - 
+  -   
