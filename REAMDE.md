@@ -162,7 +162,7 @@ c Component state, event handlers
   Part 4: Testing Express servers, user administration
   a Structure of backend application, introduction to testing
   - Project structure
-  - 
-  - 
+  - Note on exports
+  - Exercises 4.1 - 4.2
   - 
   -   
