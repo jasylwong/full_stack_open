@@ -164,5 +164,24 @@ c Component state, event handlers
   - Project structure
   - Note on exports
   - Exercises 4.1 - 4.2
+  - Testing Node applications
+  - Exercises 4.3 - 4.7
+
+  b Testing the backend
+  - Test environment
+  - supertest
+  - Initializing the database before tests
+  - Running tests one by one
+    - npm test -- tests/note_api.test.js
+    - npm test -- --test-name-pattern="a specific note is within the returned notes"
+      - can contain just part of a name too
+  - async/await
+  - async/await in the backend
+  - Refactoring the route responsible for adding a note
+  - Refactoring the route responsible for fetching a single note
+  - Refactoring the route responsible for deleting a note
+  - Optimizing the beforeEach function
+  - A true full stack developer's oath
+  - Ex
   - 
-  -   
+  - Ex
