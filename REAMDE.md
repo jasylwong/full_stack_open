@@ -182,6 +182,7 @@ c Component state, event handlers
   - Refactoring the route responsible for deleting a note
   - Optimizing the beforeEach function
   - A true full stack developer's oath
-  - Ex
+  - Exercises 4.8 - 4.12
+    - Generally shouldn't be using async/await AND then methods in the same code
   - 
   - Ex
