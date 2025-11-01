@@ -5,11 +5,12 @@ const supertest = require('supertest')
 const app = require('../app')
 const helper = require('../tests/test_helper')
 const Note = require('../models/note')
+const User = require('../models/user')
 
 const api = supertest(app)
 
 describe('when there is initially some notes saved', () => {
-  beforeEach(async() => {
+  beforeEach(async () => {
     await Note.deleteMany({})
     await Note.insertMany(helper.initialNotes)
   })
@@ -25,6 +26,7 @@ describe('when there is initially some notes saved', () => {
 
     assert.strictEqual(response.body.length, helper.initialNotes.length)
   })
+
 
   test('a specific note is within the returned notes', async () => {
     const response = await api.get('/api/notes')
@@ -57,9 +59,17 @@ describe('when there is initially some notes saved', () => {
 
   describe('addition of a new note', () => {
     test('succeeds with valid data', async () => {
+      const user = new User({
+        'username': 'test_user',
+        'name': 'Test user',
+        'password': 'testing_user_password'
+      })
+      const savedUser = await user.save()
+
       const newNote = {
         content: 'async/await simplifies making async calls',
         important: true,
+        userId: savedUser.id
       }
 
       await api.post('/api/notes').send(newNote)

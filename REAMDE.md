@@ -186,3 +186,11 @@ c Component state, event handlers
     - Generally shouldn't be using async/await AND then methods in the same code
   - Refactoring tests
   - Exercises 4.13 - 4.14
+
+  c User administration
+  - References across collections
+  - Mongoose schema for users
+  - Creating users
+    bcrypt package for generating password hashes
+  - Creating a new note
+  - Populate
