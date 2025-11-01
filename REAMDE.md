@@ -185,4 +185,4 @@ c Component state, event handlers
   - Exercises 4.8 - 4.12
     - Generally shouldn't be using async/await AND then methods in the same code
   - Refactoring tests
-  - Ex
+  - Exercises 4.13 - 4.14
