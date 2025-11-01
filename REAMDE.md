@@ -184,5 +184,5 @@ c Component state, event handlers
   - A true full stack developer's oath
   - Exercises 4.8 - 4.12
     - Generally shouldn't be using async/await AND then methods in the same code
-  - 
+  - Refactoring tests
   - Ex
