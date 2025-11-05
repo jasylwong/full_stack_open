@@ -196,3 +196,14 @@ c Component state, event handlers
   - Populate
     - linking user & notes
     - the database does not know that the ids stored in the user field of the notes collection reference documents in the user collection. The functionality of the populate method of Mongoose is based on the fact that we have defined "types" to the references in the Mongoose schema with the ref option
+
+  d Token authentication
+    - jsonwebtoken library
+  - Limiting creating new notes to logged-in users
+  - Problems of Token-based authentication
+    - Easy to implement, but access rights need a way to be revoked (ie by expiry or server-side sessions)
+  - End notes
+  - Exercises 4.15 - 4.23
+
+User:
+- tests & helper

@@ -5,6 +5,7 @@ const supertest = require('supertest')
 const app = require('../app')
 const express = require('express')
 const Blog = require('../models/blog')
+const User = require('../models/user')
 const helper = require('./test_helper')
 
 const api = supertest(app)
