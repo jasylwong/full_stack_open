@@ -1,6 +1,5 @@
 const { beforeEach, test, describe, after  } = require('node:test')
 const assert = require('node:assert')
-const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
@@ -12,15 +11,8 @@ const api = supertest(app)
 
 beforeEach(async () => {
   await Blog.deleteMany({})
+  await User.deleteMany({})
   await Blog.insertMany(helper.initialBlogs)
-  
-  // Ensure at least one user exists for blog creation tests
-  const users = await User.find({})
-  if (users.length === 0) {
-    const passwordHash = await bcrypt.hash('secret_password', 10)
-    const user = new User({ username: 'test_user', name: 'Test User', passwordHash })
-    await user.save()
-  }
 })
 
 test('all blogs are returned', async () => {
@@ -52,16 +44,16 @@ test('all blogs are returned', async () => {
 
 describe('addition of a new blog', () => {
   test('succeeds with valid data', async () => {
-    const users = await helper.usersInDb()
+    const token = await helper.createUserAndGetToken()
 
     const newBlog = {
       title: 'new blog',
       author: 'New Author',
       url: 'www.new-url.com',
-      likes: 45,
-      userId: users[0].id
+      likes: 45
     }
-    await api.post('/api/blogs').send(newBlog)
+    
+    await api.post('/api/blogs').set('Authorization', `Bearer ${token}`).send(newBlog)
       .expect(201).expect('Content-Type', /json/)
 
     const blogsAtEnd = await helper.blogsInDb()
@@ -77,16 +69,15 @@ describe('addition of a new blog', () => {
   })
 
   test('likes property defaults as 0 if missing', async () => {
-    const users = await helper.usersInDb()
+    const token = await helper.createUserAndGetToken('testuser2', 'Test User 2')
 
     const newBlog = {
       title: 'new blog',
       author: 'New Author',
-      url: 'www.new-url.com',
-      userId: users[0].id
+      url: 'www.new-url.com'
     }
 
-    await api.post('/api/blogs').send(newBlog)
+    await api.post('/api/blogs').set('Authorization', `Bearer ${token}`).send(newBlog)
       .expect(201).expect('Content-Type', /json/)
 
     const blogsAtEnd = await helper.blogsInDb()
@@ -96,13 +87,15 @@ describe('addition of a new blog', () => {
   })
 
   test('blog without title is not added', async () => {
+    const token = await helper.createUserAndGetToken('testuser3', 'Test User 3')
+
     const newBlog = {
       author: 'New Author',
       url: 'www.new-url.com',
       likes: 5
     }
 
-    await api.post('/api/blogs').send(newBlog)
+    await api.post('/api/blogs').set('Authorization', `Bearer ${token}`).send(newBlog)
       .expect(400)
 
     const blogsAtEnd = await helper.blogsInDb()
@@ -110,13 +103,15 @@ describe('addition of a new blog', () => {
   })
 
   test('blog without url is not added', async () => {
+    const token = await helper.createUserAndGetToken('testuser4', 'Test User 4')
+
     const newBlog = {
       title: 'new blog',
       author: 'New Author',
       likes: 5
     }
 
-    await api.post('/api/blogs').send(newBlog)
+    await api.post('/api/blogs').set('Authorization', `Bearer ${token}`).send(newBlog)
       .expect(400)
 
     const blogsAtEnd = await helper.blogsInDb()
