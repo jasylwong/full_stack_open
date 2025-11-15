@@ -1,9 +1,9 @@
 const { beforeEach, test, describe, after  } = require('node:test')
 const assert = require('node:assert')
+const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
-const express = require('express')
 const Blog = require('../models/blog')
 const User = require('../models/user')
 const helper = require('./test_helper')
@@ -13,6 +13,14 @@ const api = supertest(app)
 beforeEach(async () => {
   await Blog.deleteMany({})
   await Blog.insertMany(helper.initialBlogs)
+  
+  // Ensure at least one user exists for blog creation tests
+  const users = await User.find({})
+  if (users.length === 0) {
+    const passwordHash = await bcrypt.hash('secret_password', 10)
+    const user = new User({ username: 'test_user', name: 'Test User', passwordHash })
+    await user.save()
+  }
 })
 
 test('all blogs are returned', async () => {
@@ -44,11 +52,14 @@ test('all blogs are returned', async () => {
 
 describe('addition of a new blog', () => {
   test('succeeds with valid data', async () => {
+    const users = await helper.usersInDb()
+
     const newBlog = {
       title: 'new blog',
       author: 'New Author',
       url: 'www.new-url.com',
-      likes: 45
+      likes: 45,
+      userId: users[0].id
     }
     await api.post('/api/blogs').send(newBlog)
       .expect(201).expect('Content-Type', /json/)
@@ -66,10 +77,13 @@ describe('addition of a new blog', () => {
   })
 
   test('likes property defaults as 0 if missing', async () => {
+    const users = await helper.usersInDb()
+
     const newBlog = {
       title: 'new blog',
       author: 'New Author',
-      url: 'www.new-url.com'
+      url: 'www.new-url.com',
+      userId: users[0].id
     }
 
     await api.post('/api/blogs').send(newBlog)
