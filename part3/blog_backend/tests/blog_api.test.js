@@ -141,10 +141,22 @@ describe('updating of a blog', () => {
 
 describe('deletion of a blog', () => {
   test('succeeds with a status code of 204 if id is valid', async () => {
-    const blogsAtStart = await helper.blogsInDb()
-    const blogToDelete = blogsAtStart[0]
+    const token = await helper.createUserAndGetToken()
 
-    await api.delete(`/api/blogs/${blogToDelete.id}`)
+    const newBlog = {
+      title: 'new blog',
+      author: 'New Author',
+      url: 'www.new-url.com',
+      likes: 45
+    }
+    
+    await api.post('/api/blogs').set('Authorization', `Bearer ${token}`).send(newBlog)
+      .expect(201).expect('Content-Type', /json/)
+
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToDelete = blogsAtStart[blogsAtStart.length - 1]
+
+    await api.delete(`/api/blogs/${blogToDelete.id}`).set('Authorization', `Bearer ${token}`)
       .expect(204)
     
     const blogsAtEnd = await helper.blogsInDb()
@@ -153,6 +165,14 @@ describe('deletion of a blog', () => {
     assert(!titles.includes(blogToDelete.title))
 
     assert.strictEqual(blogsAtEnd.length, blogsAtStart.length - 1)
+  })
+
+  test('fails with a status code of 401 if user is invalid', async () => {
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToDelete = blogsAtStart[0]
+
+    await api.delete(`/api/blogs/${blogToDelete.id}`)
+      .expect(401)
   })
 })
 
