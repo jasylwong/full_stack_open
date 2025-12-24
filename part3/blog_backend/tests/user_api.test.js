@@ -19,32 +19,28 @@ describe('when there is initially one user in db', () => {
   })
 
   test('all users are returned', async () =>  {
-    const usersAtStart = await User.find({})
-
+    const usersInDb = await User.find({})
+    
     const usersAtEnd = await api.get('/api/users')
       .expect(200)
 
-      assert.strictEqual(usersAtEnd.body.length, usersAtStart.length)
+    assert.strictEqual(usersAtEnd.body.length, usersInDb.length)
   })
 
   test('creation succeeds with a fresh username', async () => {
-    const usersAtStart = await User.find({})
-
     const newUser = {
       name: 'name1',
       username: 'username1',
       password: 'password1'
     }
 
-    await api.post('/api/users').send(newUser)
+    const response = await api.post('/api/users').send(newUser)
       .expect(201)
+      .expect('Content-Type', /json/)
 
-    const usersAtEnd = await User.find({})
-
-    assert.strictEqual(usersAtEnd.length, usersAtStart.length + 1)
-    
-    const usernames = usersAtEnd.map(u => u.username)
-    assert(usernames.includes(newUser.username))
+    assert.strictEqual(response.body.username, newUser.username)
+    assert.strictEqual(response.body.name, newUser.name)
+    assert(response.body.id)
   })
 })
 

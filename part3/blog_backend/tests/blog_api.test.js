@@ -1,4 +1,4 @@
-const { beforeEach, test, describe, after  } = require('node:test')
+const { before, beforeEach, test, describe, after  } = require('node:test')
 const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
@@ -9,14 +9,34 @@ const helper = require('./test_helper')
 
 const api = supertest(app)
 
+const testUser = {
+  name: 'Test User',
+  username: 'testuser',
+  password: 'password123'
+}
+
+let userId
+let token
+
+before(async () => {
+  await User.deleteMany({})
+  let response = await api.post('/api/users').send(testUser)
+  userId = response.body.id
+  
+  response = await api.post('/api/login').send(testUser)
+  token = response.body.token
+})
+
 beforeEach(async () => {
   await Blog.deleteMany({})
   await User.deleteMany({})
-  await Blog.insertMany(helper.initialBlogs)
+  await Blog.insertMany(
+    helper.initialBlogs.map(blog => ({ ...blog, user: userId}))
+  )
 })
 
 test('all blogs are returned', async () => {
-  const blogsAtStart = await api.get('/api/blogs')
+  const blogsAtStart = await api.get('/api/blogs').set('Authorization', `Bearer ${token}`)
     .expect(200)
     .expect('Content-Type', /json/)
 
@@ -117,6 +137,11 @@ describe('addition of a new blog', () => {
     const blogsAtEnd = await helper.blogsInDb()
     assert.strictEqual(blogsAtEnd.length, helper.initialBlogs.length)
   })
+
+  test('fails without valid token', async () => {
+    await api.post('/api/blogs').set('Authorization', 'invalid').send({})
+      .expect(401).expect('Content-Type', /json/)
+  })
 })
 
 describe('updating of a blog', () => {
@@ -126,7 +151,7 @@ describe('updating of a blog', () => {
 
     const paramsToUpdate = { title: 'updated title', likes: blogToUpdate.likes + 1 }
 
-    await api.put(`/api/blogs/${blogToUpdate.id}`)
+    await api.put(`/api/blogs/${blogToUpdate.id}`).set('Authorization', `Bearer ${token}`)
       .send(paramsToUpdate)
       .expect(200)
 

@@ -20,14 +20,18 @@ const tokenExtractor = (request, response, next) => {
 }
 
 const userExtractor = async (request, response, next) => {
-  if (request.token) {
-    const decodedToken = jwt.verify(request.token, process.env.SECRET)
-    
-    if (decodedToken.id) {
-      request.user = await User.findById(decodedToken.id)
-    }
+  if (!request.token) {
+    return response.status(401).json({ error: 'token missing' })
   }
 
+  const decodedToken = jwt.verify(request.token, process.env.SECRET)
+  
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'token invalid' })
+  }
+
+  request.user = await User.findById(decodedToken.id)
+  
   next()
 }
 
@@ -36,7 +40,9 @@ const unknownEndpoint = (request, response) => {
 }
 
 const errorHandler = (error, request, response, next) => {
+  logger.error("-----")
   logger.error(error.message)
+  logger.error("-----")
 
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
