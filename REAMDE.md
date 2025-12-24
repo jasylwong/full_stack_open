@@ -204,6 +204,7 @@ c Component state, event handlers
     - Easy to implement, but access rights need a way to be revoked (ie by expiry or server-side sessions)
   - End notes
   - Exercises 4.15 - 4.23
+    - use --test-concurrency=1 to execute tests sequentially
 
 User:
 - tests & helper
