@@ -206,5 +206,22 @@ c Component state, event handlers
   - Exercises 4.15 - 4.23
     - use --test-concurrency=1 to execute tests sequentially
 
+  Part 5: Testing React apps
+  a Login in frontend
+  - Adding a Login Form
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+
+  b
+  c
+  d
+  e
+
+
 User:
 - tests & helper
