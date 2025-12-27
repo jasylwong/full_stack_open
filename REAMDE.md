@@ -215,9 +215,9 @@ c Component state, event handlers
   - Creating new notes
   - Saving the token to the browser's local storage
   - Exercises 5.1 - 5.4
-  - 
-
-  b
+  - A note on using local storage
+  
+  b props.children and proptypes
   c
   d
   e

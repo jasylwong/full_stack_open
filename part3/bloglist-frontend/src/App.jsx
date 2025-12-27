@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
+import Notification from './components/Notification'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -7,6 +8,7 @@ const App = () => {
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [notification, setNotification] = useState({ message: null })
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
@@ -42,7 +44,10 @@ const App = () => {
       setUsername('')
       setPassword('')
     } catch {
-      console.log('Invalid credentials')
+      setNotification({ message: 'wrong username or password', isError: true })
+      setTimeout(() => {
+        setNotification({ message: null })
+      }, 5000)
     }
   }
 
@@ -75,6 +80,7 @@ const App = () => {
   const blogList = () => (
     <>
       <h2>blogs</h2>
+      <Notification notification={notification} />
       <p>
         {user.name} logged in
         <button onClick={logout}>logout</button>
@@ -133,6 +139,10 @@ const App = () => {
     blogService.create(blogObject)
     .then(returnedBlog => {
       setBlogs(blogs.concat(returnedBlog))
+      setNotification({ message: `${title} by ${author} created`})
+      setTimeout(() => {
+        setNotification({ message: null })
+      }, 5000)
       setTitle('')
       setAuthor('')
       setUrl('')
@@ -152,6 +162,7 @@ const App = () => {
       {!user && (
         <div>
           <h2>log in to application</h2>
+          <Notification notification={notification} />
           {loginForm()}
         </div>
       )}
