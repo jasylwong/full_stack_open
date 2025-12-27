@@ -212,8 +212,8 @@ c Component state, event handlers
   - Adding Logic to the Login Form
   - Conditional Rendering of the Login Form
   - Note on Using the Label Element
-  - 
-  - 
+  - Creating new notes
+  - Saving the token to the browser's local storage
   - 
   - 
 
