@@ -209,7 +209,7 @@ c Component state, event handlers
   Part 5: Testing React apps
   a Login in frontend
   - Adding a Login Form
-  - 
+  - Adding Logic to the Login Form
   - 
   - 
   - 
