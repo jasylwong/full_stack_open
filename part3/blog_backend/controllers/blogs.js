@@ -1,7 +1,5 @@
-const jwt = require('jsonwebtoken')
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
-const User = require('../models/user')
 const middleware = require('../utils/middleware')
 const userExtractor = middleware.userExtractor
 
@@ -59,16 +57,13 @@ blogsRouter.put('/:id', async (request, response) => {
   response.status(200).json(updatedBlog)
 })
 
-blogsRouter.delete(`/:id`, async (request, response, next) => {
+blogsRouter.delete(`/:id`, userExtractor, async (request, response, next) => {
+  const user = request.user
   const blog = await Blog.findById(request.params.id)
 
   if (!blog) {
     return response.status(404).json({ error: 'blog not found' })
   }
-
-  const decodedToken = jwt.verify(request.token, process.env.SECRET)
-
-  const user = await User.findById(decodedToken.id)
 
   if (!user) {
     return response.status(401).json({ error: 'user not found' })

@@ -214,7 +214,7 @@ c Component state, event handlers
   - Note on Using the Label Element
   - Creating new notes
   - Saving the token to the browser's local storage
-  - 
+  - Exercises 5.1 - 5.4
   - 
 
   b
