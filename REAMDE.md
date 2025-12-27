@@ -210,8 +210,8 @@ c Component state, event handlers
   a Login in frontend
   - Adding a Login Form
   - Adding Logic to the Login Form
-  - 
-  - 
+  - Conditional Rendering of the Login Form
+  - Note on Using the Label Element
   - 
   - 
   - 
