@@ -221,7 +221,7 @@ c Component state, event handlers
   - Displaying the login form only when appropriate
   - The components children, aka. props.children
   - State of the forms
-  - 
+  - References to components with ref
   - 
   - 
   - 
