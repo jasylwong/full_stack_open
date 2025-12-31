@@ -218,6 +218,16 @@ c Component state, event handlers
   - A note on using local storage
   
   b props.children and proptypes
+  - Displaying the login form only when appropriate
+  - The components children, aka. props.children
+  - State of the forms
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+
   c
   d
   e
