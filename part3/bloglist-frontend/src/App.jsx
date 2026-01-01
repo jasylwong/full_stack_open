@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Blog from './components/Blog'
 import Notification from './components/Notification'
+import Togglable from './components/Togglable'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -13,6 +14,8 @@ const App = () => {
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
   const [user, setUser] = useState(null)
+
+  const blogFormRef = useRef()
 
   useEffect(() => {
     blogService.getAll()
@@ -40,6 +43,7 @@ const App = () => {
         'loggedBlogAppUser', JSON.stringify(user)
       )
 
+      blogService.setToken(user.token)
       setUser(user)
       setUsername('')
       setPassword('')
@@ -92,45 +96,48 @@ const App = () => {
       )}
     </>
   )
-
+  
   const blogForm = () => (
-    <form onSubmit={addBlog}>
-      <div>
-        <label>
-          title
-          <input
-            type="text"
-            value={title}
-            onChange={({ target }) => setTitle(target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          author
-          <input
-            type="text"
-            value={author}
-            onChange={({ target }) => setAuthor(target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          url
-          <input
-            type="text"
-            value={url}
-            onChange={({ target }) => setUrl(target.value)}
-          />
-        </label>
-      </div>
-      <button type="submit">create</button>
-    </form>
+    <Togglable buttonLabel='create' ref={blogFormRef}>
+        <form onSubmit={addBlog}>
+          <div>
+            <label>
+              title
+              <input
+                type="text"
+                value={title}
+                onChange={({ target }) => setTitle(target.value)}
+              />
+            </label>
+          </div>
+          <div>
+            <label>
+              author
+              <input
+                type="text"
+                value={author}
+                onChange={({ target }) => setAuthor(target.value)}
+              />
+            </label>
+          </div>
+          <div>
+            <label>
+              url
+              <input
+                type="text"
+                value={url}
+                onChange={({ target }) => setUrl(target.value)}
+              />
+            </label>
+          </div>
+          <button type="submit">create</button>
+        </form>
+      </Togglable>
   )
 
   const addBlog = (event) => {
     event.preventDefault()
+    blogFormRef.current.toggleVisibility()
 
     const blogObject = {
       title: title, author: author, url: url

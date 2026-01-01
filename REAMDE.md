@@ -222,9 +222,9 @@ c Component state, event handlers
   - The components children, aka. props.children
   - State of the forms
   - References to components with ref
-  - 
-  - 
-  - 
+  - One point about components
+  - The updated full stack developer's oath
+  - Exercises 5.5 - 5.11
   - 
   - 
 
