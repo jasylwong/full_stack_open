@@ -90,7 +90,7 @@ const App = () => {
       <h2>create new</h2>
       {blogForm()}
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} updateBlog={updateBlog}/>
       )}
     </>
   )
@@ -114,6 +114,12 @@ const App = () => {
     .catch(() => {
       console.log('blog creation failed')
     })
+  }
+
+  const updateBlog = (blogToUpdate) => {
+    setBlogs(blogs.map(blog => 
+      blog.id === blogToUpdate.id ? blogToUpdate : blog
+    ))
   }
 
   const logout = () => {
