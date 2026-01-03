@@ -19,7 +19,7 @@ const App = () => {
     blogService.getAll()
       .then(blogs => {
         setBlogs( blogs )
-      })  
+      })
   }, [])
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const App = () => {
           <input
             type="text"
             value={username}
-            onChange={({target}) => setUsername(target.value)}
+            onChange={({ target }) => setUsername(target.value)}
           />
         </label>
       </div>
@@ -71,7 +71,7 @@ const App = () => {
           <input
             type="text"
             value={password}
-            onChange={({target}) => setPassword(target.value)}
+            onChange={({ target }) => setPassword(target.value)}
           />
         </label>
       </div>
@@ -96,7 +96,7 @@ const App = () => {
         )}
     </>
   )
-  
+
   const blogForm = () => (
     <Togglable buttonLabel='create' ref={blogFormRef}>
       <BlogForm createBlog={addBlog} />
@@ -107,19 +107,19 @@ const App = () => {
     blogFormRef.current.toggleVisibility()
 
     blogService.create(blogObject)
-    .then(returnedBlog => {
-      setBlogs(blogs.concat(returnedBlog))
-      setTimeout(() => {
-        setNotification({ message: null })
-      }, 5000)
-    })
-    .catch(() => {
-      console.log('blog creation failed')
-    })
+      .then(returnedBlog => {
+        setBlogs(blogs.concat(returnedBlog))
+        setTimeout(() => {
+          setNotification({ message: null })
+        }, 5000)
+      })
+      .catch(() => {
+        console.log('blog creation failed')
+      })
   }
 
   const updateBlog = (blogToUpdate) => {
-    setBlogs(blogs.map(blog => 
+    setBlogs(blogs.map(blog =>
       blog.id === blogToUpdate.id ? blogToUpdate : blog
     ))
   }

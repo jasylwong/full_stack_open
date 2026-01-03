@@ -225,8 +225,8 @@ c Component state, event handlers
   - One point about components
   - The updated full stack developer's oath
   - Exercises 5.5 - 5.11
-  - 
-  - 
+  - ESlint
+  - Exercise 5.12
 
   c
   d

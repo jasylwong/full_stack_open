@@ -10,7 +10,7 @@ const Notification = ({ notification }) => {
     padding: '10px',
     marginBottom: '10px'
   }
-  
+
   if (!message) {
     return null
   }
