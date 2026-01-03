@@ -92,7 +92,7 @@ const App = () => {
       {[...blogs]
         .sort((a, b) => b.likes - a.likes)
         .map(blog =>
-          <Blog key={blog.id} blog={blog} updateBlog={updateBlog}/>
+          <Blog key={blog.id} blog={blog} updateBlog={updateBlog} deleteBlog={deleteBlog} user={user}/>
         )}
     </>
   )
@@ -122,6 +122,10 @@ const App = () => {
     setBlogs(blogs.map(blog => 
       blog.id === blogToUpdate.id ? blogToUpdate : blog
     ))
+  }
+
+  const deleteBlog = (blogToDelete) => {
+    setBlogs(blogs.filter(blog => blog.id !== blogToDelete.id))
   }
 
   const logout = () => {
