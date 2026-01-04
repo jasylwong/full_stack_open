@@ -232,8 +232,10 @@ c Component state, event handlers
   - Rendering the component for tests
   - Test file location
   - Searching for content in a component
-  - 
-  - 
+  - Debugging tests
+    - screen.debug(element) prints the HTML of a component called element to terminal. element is optional
+  - Clicking buttons in tests
+    - npm install --save-dev @testing-library/user-event
   - 
   - 
   - 
