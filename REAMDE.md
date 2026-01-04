@@ -228,7 +228,20 @@ c Component state, event handlers
   - ESlint
   - Exercise 5.12
 
-  c
+  c Testing React apps
+  - Rendering the component for tests
+  - Test file location
+  - Searching for content in a component
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  
   d
   e
 
