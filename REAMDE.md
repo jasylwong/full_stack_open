@@ -236,8 +236,8 @@ c Component state, event handlers
     - screen.debug(element) prints the HTML of a component called element to terminal. element is optional
   - Clicking buttons in tests
     - npm install --save-dev @testing-library/user-event
-  - 
-  - 
+  - Tests for the Togglable component
+  - Testing the forms
   - 
   - 
   - 
