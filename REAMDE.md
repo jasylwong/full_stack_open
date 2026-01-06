@@ -238,7 +238,7 @@ c Component state, event handlers
     - npm install --save-dev @testing-library/user-event
   - Tests for the Togglable component
   - Testing the forms
-  - 
+  - About finding the element
   - 
   - 
   - 
