@@ -239,7 +239,8 @@ c Component state, event handlers
   - Tests for the Togglable component
   - Testing the forms
   - About finding the element
-  - 
+  - Test coverage
+    - npm test -- --coverage
   - 
   - 
   - 
