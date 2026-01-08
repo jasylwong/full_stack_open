@@ -241,7 +241,7 @@ c Component state, event handlers
   - About finding the element
   - Test coverage
     - npm test -- --coverage
-  - 
+  - Exercises 5.13 - 5.16
   - 
   - 
   
