@@ -1,6 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
+import blogService from '../services/blogs'
+
+vi.mock('../services/blogs')
 
 const user = {
   name: 'test user name',
@@ -10,7 +13,7 @@ const blog = {
   title: 'test title',
   author: 'test author',
   url: 'testurl.com',
-  likes: 4242,
+  likes: 34,
   user: user
 }
 
@@ -23,7 +26,7 @@ describe('<Blog>', () => {
 
     const hiddenDiv = container.querySelector('div[style*="display: none"]')
     expect(hiddenDiv).toHaveTextContent('testurl.com')
-    expect(hiddenDiv).toHaveTextContent('likes 4242')
+    expect(hiddenDiv).toHaveTextContent('likes 34')
   })
 
   test('shows blog URL and likes when view button clicked', async () => {
@@ -35,6 +38,20 @@ describe('<Blog>', () => {
 
     const visibleDiv = container.querySelector('div[style=""]')
     expect(visibleDiv).toHaveTextContent('testurl.com')
-    expect(visibleDiv).toHaveTextContent('likes 4242')
+    expect(visibleDiv).toHaveTextContent('likes 34')
+  })
+
+  test('increases like count when like button clicked twice', async () => {
+    const mockHandler = vi.fn()
+    blogService.update.mockResolvedValue({ ...blog, likes: blog.likes + 1 })
+
+    render(<Blog blog={blog} user={user} updateBlog={mockHandler}/>)
+
+    const userEventSession = userEvent.setup()
+    const button = screen.getByText('like')
+    await userEventSession.click(button)
+    await userEventSession.click(button)
+
+    expect(mockHandler.mock.calls).toHaveLength(2)
   })
 })
