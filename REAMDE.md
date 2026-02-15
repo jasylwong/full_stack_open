@@ -242,11 +242,16 @@ c Component state, event handlers
   - Test coverage
     - npm test -- --coverage
   - Exercises 5.13 - 5.16
-  - 
-  - 
+  - Frontend integration tests
+  - Snapshot testing
+
+  d End to end testing: Playwright
+  - Playwright: end to end testing for web frameworks
+  - Initializing tests
+  - Testing our own code
+  - Writing on the form
   
-  d
-  e
+  e End to end testing: Cypess 
 
 
 User:
