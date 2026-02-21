@@ -251,6 +251,7 @@ c Component state, event handlers
   - Testing our own code
   - Writing on the form
   - Test Initialization
+  - Testing note creation
   
   e End to end testing: Cypess 
 
