@@ -252,6 +252,7 @@ c Component state, event handlers
   - Writing on the form
   - Test Initialization
   - Testing note creation
+  - Controlling the state of the database
   
   e End to end testing: Cypess 
 
