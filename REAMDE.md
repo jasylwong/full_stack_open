@@ -254,6 +254,10 @@ c Component state, event handlers
   - Testing note creation
   - Controlling the state of the database
   - Test for failed login
+  - Running tests one by one
+    - Use test.only('etc...'), or
+    - npm test -- -g 'test name'
+  - Helper functions for tests
   
   e End to end testing: Cypess 
 
