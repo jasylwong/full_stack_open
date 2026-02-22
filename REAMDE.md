@@ -253,6 +253,7 @@ c Component state, event handlers
   - Test Initialization
   - Testing note creation
   - Controlling the state of the database
+  - Test for failed login
   
   e End to end testing: Cypess 
 
