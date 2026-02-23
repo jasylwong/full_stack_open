@@ -258,6 +258,7 @@ c Component state, event handlers
     - Use test.only('etc...'), or
     - npm test -- -g 'test name'
   - Helper functions for tests
+  - Note importance change revisited
   
   e End to end testing: Cypess 
 
