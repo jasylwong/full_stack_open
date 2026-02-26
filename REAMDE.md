@@ -246,13 +246,22 @@ c Component state, event handlers
   - Snapshot testing
 
   d End to end testing: Playwright
-  - Playwright: end to end testing for web frameworks
+  - Playwright:
+    - End to end testing for web frameworks executed in the Node process. Alt to Cypress
   - Initializing tests
+    - npm init playwright@latest
+    - Run test: npm playwright test
+    - Show report: npm playwright show-report
+    - Run test via the graphical UI: npm run test -- --ui
+    - Import via: import { test, expect } from '@playwright/test'
   - Testing our own code
+    - Need to enable BE to start in testing mode: npm cross-env NODE_ENV=test node --watch index.js
+    - Tests can be slow if failing. Reduce in playwright.config.js
   - Writing on the form
   - Test Initialization
   - Testing note creation
   - Controlling the state of the database
+    - Ideally the server's db should be same each time we run our tests ie best to empty it & reformat
   - Test for failed login
   - Running tests one by one
     - Use test.only('etc...'), or
