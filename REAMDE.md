@@ -259,6 +259,11 @@ c Component state, event handlers
     - npm test -- -g 'test name'
   - Helper functions for tests
   - Note importance change revisited
+  - Test development and debugging
+    - Debug mode: npm test -- -g'test name' --debug
+    - Use await page.pause() when debugging to go straight to a specific point
+    - A visual trace of the tests can be saved with npm run test -- --trace on, and viewed with
+      npx playwright show-report
   
   e End to end testing: Cypess 
 
