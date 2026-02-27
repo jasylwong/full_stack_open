@@ -1,0 +1,12 @@
+# @name login
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+  "username": "mluukkai",
+  "password": "salainen"
+}
+
+###
+DELETE http://localhost:3003/api/blogs/69a17b0f6deb0ca691e7cc49
+Authorization: Bearer {{login.response.body.token}}
